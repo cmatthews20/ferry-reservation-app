@@ -1,5 +1,7 @@
 # ferry-reservation-app
 
+(remember, npm i to install things from the frontend package.json)
+
 ## Cole's Setup Steps
 
 - Create backend folder in project root. Use the following command and follow the prompts to create the frontend with Next.js. Name the next app `frontend` to create the desired frontend/backend separation. 
