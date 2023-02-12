@@ -56,3 +56,5 @@ export default function Home() {
 `docker run --name frs-db -p 5432:5432 -e POSTGRES_USER=frs -e POSTGRES_PASSWORD=password -d postgres`
 
 This command creates a new docker container with postgres running inside.
+
+- Except now we are using SQLite database...i just created a database folder with a database file...that should work fine, I verified it in DataGrip
