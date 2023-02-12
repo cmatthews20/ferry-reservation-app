@@ -47,3 +47,12 @@ export default function Home() {
 }
 
 '''
+
+- Just to get a sample page going, `components` folder was created. This folder contains the `.jsx` react files for individual UI components. I created a Navbar and put it on the homepage (which is crossings for now). Then I just did a mockup table for crossings (in the homepage index file).
+
+- Install docker (I installed docker desktop here: https://www.docker.com/products/docker-desktop/ since it comes with the dependencies)
+- Run the following command in project root:
+
+`docker run --name frs-db -p 5432:5432 -e POSTGRES_USER=frs -e POSTGRES_PASSWORD=password -d postgres`
+
+This command creates a new docker container with postgres running inside.
