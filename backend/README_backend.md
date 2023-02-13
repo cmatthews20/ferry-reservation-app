@@ -11,6 +11,6 @@
 `python -m uvicorn api:app --reload`
 
 - Note: The command `uvicorn api:app` refers to:
-    - api: the file main.py (the Python "module").
+    - api: the file api.py (the Python "module").
     - app: the object created inside of api.py with the line app = FastAPI().
     - --reload: make the server restart after code changes. Only use for development.
