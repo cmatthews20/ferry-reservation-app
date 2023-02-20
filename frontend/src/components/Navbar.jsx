@@ -24,7 +24,7 @@ function Navbar() {
           px={5}
           py={4}
         >
-          <Link href="/">
+          <Link href="../SearchPage/searchPage">
             <Button colorScheme="">Crossings</Button>
           </Link>
           <Link href="/bookings">
