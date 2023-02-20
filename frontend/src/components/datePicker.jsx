@@ -1,3 +1,4 @@
+//The date picker component fot the search bar
 import React, { useState } from "react";
 
 import DatePicker from "react-datepicker";
