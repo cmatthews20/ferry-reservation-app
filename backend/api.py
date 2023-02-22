@@ -6,15 +6,11 @@ Doing this allows us to read and write to the database and helps the front-end c
 in the SQLite database.
 """
 
-# pip install sqlalchemy
-
 from typing import List
-
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
-
-import crud, models, schemas
-from database import SessionLocal, engine
+import crud, schemas
+from database import SessionLocal
 
 # DO NOT USE ENGINE if db already exists
 # models.Base.metadata.create_all(bind=engine)

@@ -1,4 +1,4 @@
-## Backend Setup (Umama):
+## FastAPI Setup:
 
 - Run the following to set up FastAPI and Uvicorn (to run server)
 
@@ -10,6 +10,8 @@
 
 `python -m uvicorn api:app --reload`
 
+`uvicorn api:app --reload` also works from the backend directory.
+
 - Note: The command `uvicorn api:app` refers to:
     - api: the file api.py (the Python "module").
     - app: the object created inside of api.py with the line app = FastAPI().
@@ -18,3 +20,7 @@
 ### Database Set-up
 - Created sample data in CSV format and imported it in to the created table using DB Browser for SQLite
 - Sample data can be used by all aspects of the application to simulate real-life application
+
+### SQLAlchemy Installation
+
+`pip install sqlalchemy`

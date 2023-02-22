@@ -1,8 +1,8 @@
 """
-Database models/classes (ORM Models)
+Database models/classes (ORM Models) used by SQLAlchemy and CRUD operations.
 """
 
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 from database import Base

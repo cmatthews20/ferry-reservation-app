@@ -1,6 +1,9 @@
-from sqlalchemy.orm import Session
+"""
+CREATE, READ, UPDATE, DELETE functions for the API to use on the database
+"""
 
-import models, schemas
+from sqlalchemy.orm import Session
+import models
 
 
 def get_ports(db: Session, skip: int = 0, limit: int = 100):

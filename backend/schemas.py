@@ -1,5 +1,5 @@
 """
-Pydantic models (schemas)
+Pydantic models (schemas). These classes model the data for the API.
 """
 
 from typing import List, Union
