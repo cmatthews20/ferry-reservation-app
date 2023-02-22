@@ -14,3 +14,7 @@
     - api: the file api.py (the Python "module").
     - app: the object created inside of api.py with the line app = FastAPI().
     - --reload: make the server restart after code changes. Only use for development.
+
+### Database Set-up
+- Created sample data in CSV format and imported it in to the created table using DB Browser for SQLite
+- Sample data can be used by all aspects of the application to simulate real-life application
