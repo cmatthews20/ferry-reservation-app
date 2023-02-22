@@ -45,7 +45,7 @@ def db_setup():
     :param: none
     :return: no return
     """
-    db = "database/database.db"
+    db = "backend/database/database.db"
 
     create_crossings_sql = """CREATE TABLE IF NOT EXISTS crossings (
                                     crossing_id text PRIMARY KEY,
