@@ -60,7 +60,7 @@ class Booking(BaseClass):
 
     user_id = Column(String, ForeignKey("users.user_id"), index=True)
     schedule_id = Column(String, ForeignKey("schedule.schedule_id"), index=True)
-    vehicle_id = Column(String, ForeignKey("vehicles.vehicle_id"), index=True)
+    vehicle_id = Column(String, ForeignKey("entity.entity_id"), index=True)
     passengers = Column(String, index=True)
 
 
