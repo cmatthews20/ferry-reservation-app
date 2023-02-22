@@ -1,5 +1,5 @@
 /*
-Bookings Table shows the current active bookings of the user and the past bookings done
+My Bookings Table shows the current active bookings of the user and the past bookings done
 Along with options to choose an action to either cancel or reschedule
 */
 import { ChevronDownIcon} from "@chakra-ui/icons";
