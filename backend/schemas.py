@@ -1,6 +1,6 @@
-'''
+"""
 Pydantic models (schemas)
-'''
+"""
 
 from typing import List, Union
 
@@ -22,18 +22,32 @@ class Port(PortBase):
         orm_mode = True
 
 
-#class CrossingBase(BaseModel):
-#    email: str
-#
-#
-#class CrossingCreate(CrossingBase):
-#    password: str
-#
-#
-#class Crossing(CrossingBase):
-#    id: int
-#    is_active: bool
-#    items: List[Item] = []
-#
-#    class Config:
-#        orm_mode = True
+class CrossingBase(BaseModel):
+    depart_port: str
+    arrive_port: str
+
+
+class CrossingCreate(CrossingBase):
+    pass
+
+
+class Crossing(CrossingBase):
+    crossing_id: str
+
+    class Config:
+        orm_mode = True
+
+
+class EntityBase(BaseModel):
+    entity: str
+
+
+class EntityCreate(EntityBase):
+    pass
+
+
+class Entity(EntityBase):
+    entity_id: str
+
+    class Config:
+        orm_mode = True
