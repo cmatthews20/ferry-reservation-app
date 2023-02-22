@@ -31,6 +31,9 @@ function Navbar() {
           <Link href="../SearchPage/searchPage">
             <Button colorScheme="">Crossings</Button>
           </Link>
+          <Link href="../Bookings/bookings">
+            <Button colorScheme="">Bookings</Button>
+          </Link>
           <Link href="../MyBookings/myBookings">
             <Button colorScheme="">My Bookings</Button>
           </Link>
