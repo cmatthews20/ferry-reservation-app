@@ -12,8 +12,6 @@ from sqlalchemy.orm import Session
 import crud, schemas
 from database import SessionLocal
 
-# DO NOT USE ENGINE if db already exists
-# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
