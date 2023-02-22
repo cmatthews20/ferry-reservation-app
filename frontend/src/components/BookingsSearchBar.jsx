@@ -1,11 +1,11 @@
 /*
-This is the SearchBar used to collect the Booking ID from users to search the Bookings database and display the bookings in a table
+This is the Bookings SearchBar used to collect the Booking ID from users to search the Bookings database and display the bookings in a table
 */
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik';
 import { Search2Icon } from '@chakra-ui/icons'
 
-function SearchBar() {
+function BookingsSearchBar() {
     function validateBookingID(value) {
         let error 
         if (!value) {
@@ -55,4 +55,4 @@ function SearchBar() {
     </Formik>
     );
 }
-export default SearchBar;
+export default BookingsSearchBar;

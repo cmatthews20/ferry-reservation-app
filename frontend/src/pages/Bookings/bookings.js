@@ -3,7 +3,7 @@ This page loads the Booking table component to display the booking searched by b
 */
 import { Box, Center, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
-import SearchBar from "../../components/SearchBar.jsx";
+import SearchBar from "../../components/BookingsSearchBar.jsx";
 import { DarkModeSwitch } from "../../components/DarkModeSwitch";
 import Navbar from '../../components/Navbar.jsx';
 
