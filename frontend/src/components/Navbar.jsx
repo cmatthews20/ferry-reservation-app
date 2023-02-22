@@ -27,7 +27,7 @@ function Navbar() {
           <Link href="../SearchPage/searchPage">
             <Button colorScheme="">Crossings</Button>
           </Link>
-          <Link href="/bookings">
+          <Link href="../MyBookings/myBookings">
             <Button colorScheme="">My Bookings</Button>
           </Link>
           <Link href="/profile">
