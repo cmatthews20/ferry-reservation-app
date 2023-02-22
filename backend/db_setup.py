@@ -65,7 +65,7 @@ def db_setup():
     create_ferries_sql = """CREATE TABLE IF NOT EXISTS ferries (
                                     ferry_id text PRIMARY KEY,
                                     ferry_name text NOT NULL,
-                                    passenger_capcity integer,
+                                    passenger_capacity integer,
                                     vehicle_capacity integer
                               );"""
 
