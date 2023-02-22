@@ -9,3 +9,4 @@ Use the following command in the `frontend` root to install the frontend depende
 `npm i`
 
 //TODO: Finish instructions for running project and dependency installation
+//TODO: Update requirements.txt file for `pip install -r /path/to/requirements.txt`
