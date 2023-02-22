@@ -1,3 +1,7 @@
+/*
+This is the Navbar component that is displayed at the top of every page in the application so that it allows for easier navigation.
+It contains the links to direct users to the different pages.
+*/
 import {
     ChakraProvider,
     Button,

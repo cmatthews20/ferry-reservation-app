@@ -1,3 +1,6 @@
+/*
+This page loads the Booking table component to display the bookings of the active and past bookigns of the users.
+*/
 import { Box, Center, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
 import BookingTable from "../../components/BookingTable";

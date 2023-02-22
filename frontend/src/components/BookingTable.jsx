@@ -1,3 +1,7 @@
+/*
+Bookings Table shows the current active bookings of the user and the past bookings done
+Along with options to choose an action to either cancel or reschedule
+*/
 import { ChevronDownIcon} from "@chakra-ui/icons";
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer} from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem, Heading, Flex } from '@chakra-ui/react'
