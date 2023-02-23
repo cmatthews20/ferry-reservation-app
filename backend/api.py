@@ -24,11 +24,6 @@ def get_db():
         db.close()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello there - Ferry Reservation API is UP"}
-
-
 @app.get("/crossings", response_model=List[schemas.Crossing])
 def read_crossings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     crossings = crud.get_crossings(db, skip=skip, limit=limit)
@@ -74,7 +69,7 @@ def read_bookings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 
 
 @app.get("/bookings/{booking_id}", response_model=schemas.Booking)
-def read_port(booking_id: str, db: Session = Depends(get_db)):
+def read_booking(booking_id: str, db: Session = Depends(get_db)):
     booking = crud.get_booking(db, booking_id=booking_id)
     if booking is None:
         raise HTTPException(status_code=404, detail="Booking not found")
