@@ -31,25 +31,37 @@ async def root():
 
 @app.get("/crossings", response_model=List[schemas.Crossing])
 def read_crossings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    crossings = crud.get_crossings_table(db, skip=skip, limit=limit)
-    return crossings
+    crossings_table = crud.get_crossings_table(db, skip=skip, limit=limit)
+    if crossings_table == []:
+        raise HTTPException(status_code=404, detail="Crossings table is empty")
+    return crossings_table
+
+
+@app.get("/crossings/{crossing_id}", response_model=schemas.Crossing)
+def read_schedule(crossing_id: str, db: Session = Depends(get_db)):
+    crossing = crud.get_crossing_by_id(db, crossing_id=crossing_id)
+    if crossing is None:
+        raise HTTPException(status_code=404, detail="Crossing not found")
+    return crossing
 
 
 @app.get("/schedule", response_model=List[schemas.Schedule])
 def read_schedule(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    schedules = crud.get_schedule_table(db, skip=skip, limit=limit)
-    return schedules
+    schedule_table = crud.get_schedule_table(db, skip=skip, limit=limit)
+    if schedule_table == []:
+        raise HTTPException(status_code=404, detail="Schedule table is empty")
+    return schedule_table
 
 
 @app.get("/ports", response_model=List[schemas.Port])
 def read_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    ports = crud.get_ports_table(db, skip=skip, limit=limit)
-    return ports
+    ports_table = crud.get_ports_table(db, skip=skip, limit=limit)
+    return ports_table
 
 
 @app.get("/ports/{port_id}", response_model=schemas.Port)
 def read_port(port_id: str, db: Session = Depends(get_db)):
-    port = crud.get_port(db, port_id=port_id)
+    port = crud.get_port_by_id(db, port_id=port_id)
     if port is None:
         raise HTTPException(status_code=404, detail="Port not found")
     return port
@@ -57,14 +69,14 @@ def read_port(port_id: str, db: Session = Depends(get_db)):
 
 @app.get("/entities", response_model=List[schemas.Entity])
 def read_entities(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    entities = crud.get_entities_table(db, skip=skip, limit=limit)
-    return entities
+    entities_table = crud.get_entities_table(db, skip=skip, limit=limit)
+    return entities_table
 
 
 @app.get("/prices", response_model=List[schemas.Price])
 def read_prices(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    prices = crud.get_prices_table(db, skip=skip, limit=limit)
-    return prices
+    prices_table = crud.get_prices_table(db, skip=skip, limit=limit)
+    return prices_table
 
 
 @app.get("/bookings", response_model=List[schemas.Booking])
@@ -77,7 +89,7 @@ def read_bookings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 
 @app.get("/bookings/{booking_id}", response_model=schemas.Booking)
 def read_booking(booking_id: str, db: Session = Depends(get_db)):
-    booking = crud.get_booking(db, booking_id=booking_id)
+    booking = crud.get_booking_by_id(db, booking_id=booking_id)
     if booking is None:
         raise HTTPException(status_code=404, detail="Booking not found")
     return booking
@@ -90,21 +102,21 @@ def create_booking(booking: schemas.BookingCreate, db: Session = Depends(get_db)
 
 @app.delete("/bookings/{booking_id}")
 def delete_booking(booking_id: str, db: Session = Depends(get_db)):
-    booking = crud.get_booking(db, booking_id=booking_id)
+    booking = crud.get_booking_by_id(db, booking_id=booking_id)
     if booking is None:
         raise HTTPException(status_code=404, detail="Booking not found")
     else:
-        crud.delete_booking(db, booking_id)
+        crud.delete_booking_by_id(db, booking_id)
         return {"message": "Booking deleted"}
 
 
 @app.get("/ferries", response_model=List[schemas.Ferry])
 def read_ferries(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    ferries = crud.get_ferries_table(db, skip=skip, limit=limit)
-    return ferries
+    ferries_table = crud.get_ferries_table(db, skip=skip, limit=limit)
+    return ferries_table
 
 
 @app.get("/users", response_model=List[schemas.User])
 def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    users = crud.get_users_table(db, skip=skip, limit=limit)
-    return users
+    users_table = crud.get_users_table(db, skip=skip, limit=limit)
+    return users_table
