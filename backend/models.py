@@ -58,9 +58,9 @@ class Booking(BaseClass):
 
     booking_id = Column(String, primary_key=True, index=True)
 
-    user_id = Column(String, ForeignKey("users.user_id"), index=True)
+    user_id = Column(String, index=True)
     schedule_id = Column(String, ForeignKey("schedule.schedule_id"), index=True)
-    vehicle_id = Column(String, ForeignKey("vehicles.vehicle_id"), index=True)
+    vehicle_id = Column(String, ForeignKey("entity.entity_id"), index=True)
     passengers = Column(String, index=True)
 
 
