@@ -102,6 +102,7 @@ class Booking(BookingBase):
     class Config:
         orm_mode = True
 
+
 class FerryBase(BaseModel):
     ferry_name: str
     passenger_capacity: int

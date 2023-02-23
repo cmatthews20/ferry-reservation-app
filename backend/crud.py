@@ -11,7 +11,11 @@ def get_crossings_table(db: Session, skip: int = 0, limit: int = 100):
 
 
 def get_crossing_by_id(db: Session, crossing_id: str):
-    return db.query(models.Crossing).filter(models.Crossing.crossing_id == crossing_id).first()
+    return (
+        db.query(models.Crossing)
+        .filter(models.Crossing.crossing_id == crossing_id)
+        .first()
+    )
 
 
 def get_schedule_table(db: Session, skip: int = 0, limit: int = 100):
@@ -63,7 +67,9 @@ def create_booking(db: Session, booking: schemas.BookingCreate):
 
 
 def delete_booking_by_id(db: Session, booking_id: str):
-    booking = db.query(models.Booking).filter(models.Booking.booking_id == booking_id).first()
+    booking = (
+        db.query(models.Booking).filter(models.Booking.booking_id == booking_id).first()
+    )
     db.delete(booking)
     db.commit()
     return
