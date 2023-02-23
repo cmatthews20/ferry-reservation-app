@@ -59,6 +59,11 @@ def create_booking(db: Session, booking: schemas.BookingCreate):
     return db_booking
 
 
+def delete_booking(db: Session, booking_id: str):
+    delete = db.query(models.Booking).filter(models.Booking.booking_id == booking_id).first()
+    db.delete(delete)
+
+
 def get_ferries(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Ferry).offset(skip).limit(limit).all()
 
