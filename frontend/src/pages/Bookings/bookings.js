@@ -5,7 +5,6 @@ import { Box, Center, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
 import SearchBar from "../../components/BookingsSearchBar.jsx";
 import BookingsTable from "@/components/BookingsTable.jsx";
-import TestTable from "@/components/TestTable.jsx";
 import { DarkModeSwitch } from "../../components/DarkModeSwitch";
 import Navbar from '../../components/Navbar.jsx';
 
@@ -18,6 +17,7 @@ export default function Bookings() {
           <VStack>
             <Heading as='h2' size='2xl'>Bookings</Heading>
                 <Box>
+                    <SearchBar />
                     <BookingsTable/>
                 </Box>
           </VStack>

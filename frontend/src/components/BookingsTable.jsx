@@ -2,14 +2,16 @@ import React, {useEffect, useState} from 'react';
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer} from "@chakra-ui/react";
 
 const API_HOST = "http://127.0.0.1:8000";
-const INVENTORY_API_URL = `${API_HOST}/bookings`;
+const BOOKINGS_API_URL = `${API_HOST}/bookings`;
 
 export default function BookingsTable() {
+    // setting up the state hook
     const [data, setData] = useState([]);
-    //GET request function to DB
+    
+    // GET request function to DB
     async function fetchBookings() {
         try {
-            const response = await fetch('http://127.0.0.1:8000/bookings', {
+            const response = await fetch(`${BOOKINGS_API_URL}`, {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
@@ -20,47 +22,17 @@ export default function BookingsTable() {
             }
             const result = await response.json();
             //console.log(result);
+            setData(result);
             return result;
         } catch (err) {
             console.log(err);
         }
     }
 
-    const fetchData = () => {
-        fetch(`http://127.0.0.1:8000/bookings`)
-          .then((response) => response.json())
-          .then((actualData) => {
-            console.log(actualData);
-            setData(actualData);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      };
-
     // Calling the function on component mount
     useEffect(() => {
-        fetchData();
+        fetchBookings();
     }, []);
-    
-    //console.log(jsonData);
-
-    // function JsonDataDisplay(){
-    //     const DisplayData = jsonData.map(
-    //         (info)=>{
-    //             return(
-    //                 <tr>
-    //                     <td>{info.booking_id}</td>
-    //                     <td>{info.user_id}</td>
-    //                     <td>{info.city}</td>
-    //                 </tr>
-    //             )
-    //         }
-    //     )
-    // }
-
-    // JsonDataDisplay();
-    // console.log(DisplayData);
 
     return (
         <TableContainer>
@@ -75,7 +47,6 @@ export default function BookingsTable() {
             </Tr>
             </Thead>
             <Tbody>
-            {console.log("data is" + data)}
             {data.map((value,key) => (
           <tr>
             <td>{value.booking_id}</td>
