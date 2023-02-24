@@ -6,7 +6,7 @@ import { ChevronDownIcon} from "@chakra-ui/icons";
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer} from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem, Heading, Flex } from '@chakra-ui/react'
 import { Button, ButtonGroup, Stack, VStack, StackDivider } from '@chakra-ui/react'
-export default function BookingTable() {
+export default function MyBookingTable() {
     return (
     <>
     <VStack
