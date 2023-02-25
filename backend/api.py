@@ -30,67 +30,67 @@ async def root():
 
 
 @app.get("/crossings", response_model=List[schemas.Crossing])
-def read_crossings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    crossings_table = crud.get_crossings_table(db, skip=skip, limit=limit)
+def get_crossings_table(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    crossings_table = crud.read_crossings_table(db, skip=skip, limit=limit)
     if crossings_table == []:
         raise HTTPException(status_code=404, detail="Crossings table is empty")
     return crossings_table
 
 
-@app.get("/crossings/{crossing_id}", response_model=schemas.Crossing)
-def read_schedule(crossing_id: str, db: Session = Depends(get_db)):
-    crossing = crud.get_crossing_by_id(db, crossing_id=crossing_id)
+@app.get("/crossings/{crossing_id}", response_model=List[schemas.Crossing])
+def get_crossings_row(crossing_id: str, db: Session = Depends(get_db)):
+    crossing = crud.read_crossing_by_id(db, crossing_id=crossing_id)
     if crossing is None:
         raise HTTPException(status_code=404, detail="Crossing not found")
     return crossing
 
 
-@app.get("/schedule", response_model=List[schemas.Schedule])
-def read_schedule(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    schedule_table = crud.get_schedule_table(db, skip=skip, limit=limit)
+@app.get("/schedules", response_model=List[schemas.Schedule])
+def get_schedule(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    schedule_table = crud.read_schedule_table(db, skip=skip, limit=limit)
     if schedule_table == []:
         raise HTTPException(status_code=404, detail="Schedule table is empty")
     return schedule_table
 
 
 @app.get("/ports", response_model=List[schemas.Port])
-def read_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    ports_table = crud.get_ports_table(db, skip=skip, limit=limit)
+def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    ports_table = crud.read_ports_table(db, skip=skip, limit=limit)
     return ports_table
 
 
-@app.get("/ports/{port_id}", response_model=schemas.Port)
-def read_port(port_id: str, db: Session = Depends(get_db)):
-    port = crud.get_port_by_id(db, port_id=port_id)
+@app.get("/ports/{port_id}", response_model=List[schemas.Port])
+def get_port(port_id: str, db: Session = Depends(get_db)):
+    port = crud.read_port_by_id(db, port_id=port_id)
     if port is None:
         raise HTTPException(status_code=404, detail="Port not found")
     return port
 
 
 @app.get("/entities", response_model=List[schemas.Entity])
-def read_entities(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    entities_table = crud.get_entities_table(db, skip=skip, limit=limit)
+def get_entities(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    entities_table = crud.read_entities_table(db, skip=skip, limit=limit)
     return entities_table
 
 
 @app.get("/prices", response_model=List[schemas.Price])
-def read_prices(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    prices_table = crud.get_prices_table(db, skip=skip, limit=limit)
+def get_prices(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    prices_table = crud.read_prices_table(db, skip=skip, limit=limit)
     return prices_table
 
 
 @app.get("/bookings", response_model=List[schemas.Booking])
-def read_bookings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    bookings_table = crud.get_bookings_table(db, skip=skip, limit=limit)
+def get_bookings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    bookings_table = crud.read_bookings_table(db, skip=skip, limit=limit)
     if bookings_table == []:
         raise HTTPException(status_code=404, detail="Booking table is empty")
     return bookings_table
 
 
-@app.get("/bookings/{booking_id}", response_model=schemas.Booking)
-def read_booking(booking_id: str, db: Session = Depends(get_db)):
-    booking = crud.get_booking_by_id(db, booking_id=booking_id)
-    if booking is None:
+@app.get("/bookings/{booking_id}", response_model=List[schemas.Booking])
+def get_booking(booking_id: str, db: Session = Depends(get_db)):
+    booking = crud.read_booking_by_id(db, booking_id=booking_id)
+    if booking == []:
         raise HTTPException(status_code=404, detail="Booking not found")
     return booking
 
@@ -102,7 +102,7 @@ def create_booking(booking: schemas.BookingCreate, db: Session = Depends(get_db)
 
 @app.delete("/bookings/{booking_id}")
 def delete_booking(booking_id: str, db: Session = Depends(get_db)):
-    booking = crud.get_booking_by_id(db, booking_id=booking_id)
+    booking = crud.read_booking_by_id(db, booking_id=booking_id)
     if booking is None:
         raise HTTPException(status_code=404, detail="Booking not found")
     else:
@@ -111,12 +111,12 @@ def delete_booking(booking_id: str, db: Session = Depends(get_db)):
 
 
 @app.get("/ferries", response_model=List[schemas.Ferry])
-def read_ferries(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    ferries_table = crud.get_ferries_table(db, skip=skip, limit=limit)
+def get_ferries(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    ferries_table = crud.read_ferries_table(db, skip=skip, limit=limit)
     return ferries_table
 
 
 @app.get("/users", response_model=List[schemas.User])
-def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    users_table = crud.get_users_table(db, skip=skip, limit=limit)
+def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    users_table = crud.read_users_table(db, skip=skip, limit=limit)
     return users_table
