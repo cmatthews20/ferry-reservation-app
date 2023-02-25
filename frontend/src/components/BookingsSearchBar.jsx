@@ -2,10 +2,11 @@
 This is the Bookings SearchBar used to collect the Booking ID from users to search the Bookings database and display the bookings in a table
 */
 import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
-import { Field, Form, Formik } from 'formik';
+import { Field, Form, Formik} from 'formik';
 import { Search2Icon } from '@chakra-ui/icons'
 
-function BookingsSearchBar() {
+function BookingsSearchBar({handleSearch}) {
+
     function validateBookingID(value) {
         let error 
         if (!value) {
@@ -19,10 +20,10 @@ function BookingsSearchBar() {
             initialValues={{ booking_id: ''}}
             onSubmit={(values, actions) => {
                 setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2))
+                    handleSearch(values["booking_id"])
                     actions.setSubmitting(false)
                 }, 1000)
-            }}
+            }} 
     >
         {(props) => (
             <Form>

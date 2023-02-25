@@ -1,5 +1,9 @@
-import React, {useEffect, useState} from 'react';
+/*
+This is the bookings table component that uses the Bookings Search Bar component to display searched bookings
+*/
+import React, {useState} from 'react';
 import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer} from "@chakra-ui/react";
+import BookingsSearchBar from './BookingsSearchBar';
 
 const API_HOST = "http://127.0.0.1:8000";
 const BOOKINGS_API_URL = `${API_HOST}/bookings`;
@@ -7,11 +11,16 @@ const BOOKINGS_API_URL = `${API_HOST}/bookings`;
 export default function BookingsTable() {
     // setting up the state hook
     const [data, setData] = useState([]);
-    
+
+    //callback function from search bar to table
+    function handleSearch(booking_id) {
+        fetchBookings(booking_id);
+    }
+
     // GET request function to DB
-    async function fetchBookings() {
+    async function fetchBookings(BOOKING_ID) {
         try {
-            const response = await fetch(`${BOOKINGS_API_URL}`, {
+            const response = await fetch(`${BOOKINGS_API_URL}/${BOOKING_ID}`, {
                 method: 'GET',
                 headers: {
                     accept: 'application/json',
@@ -21,7 +30,7 @@ export default function BookingsTable() {
                 throw new Error(`Error! status: ${response.status}`);
             }
             const result = await response.json();
-            //console.log(result);
+            // console.log("result is " + JSON.stringify(result));
             setData(result);
             return result;
         } catch (err) {
@@ -29,12 +38,9 @@ export default function BookingsTable() {
         }
     }
 
-    // Calling the function on component mount
-    useEffect(() => {
-        fetchBookings();
-    }, []);
-
     return (
+        <>
+        <BookingsSearchBar handleSearch={handleSearch}/>
         <TableContainer>
         <Table variant='simple'>
             <Thead>
@@ -48,16 +54,18 @@ export default function BookingsTable() {
             </Thead>
             <Tbody>
             {data.map((value,key) => (
-          <tr>
-            <td>{value.booking_id}</td>
-            <td>{value.user_id}</td>
-            <td>{value.schedule_id}</td>
-            <td>{value.vehicle_id}</td>
-            <td>{value.passengers}</td>
-          </tr>
-        ))}
+          <Tr>
+            <Td>{value.booking_id}</Td>
+            <Td>{value.user_id}</Td>
+            <Td>{value.schedule_id}</Td>
+            <Td>{value.vehicle_id}</Td>
+            <Td>{value.passengers}</Td>
+          </Tr>
+        ))
+        }
             </Tbody>
         </Table>
         </TableContainer>
+        </>
     );
 }
