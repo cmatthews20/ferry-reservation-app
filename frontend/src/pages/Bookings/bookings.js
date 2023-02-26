@@ -17,7 +17,6 @@ export default function Bookings() {
           <VStack>
             <Heading as='h2' size='2xl'>Bookings</Heading>
                 <Box>
-                    <SearchBar />
                     <BookingsTable/>
                 </Box>
           </VStack>

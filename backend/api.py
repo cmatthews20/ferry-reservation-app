@@ -22,7 +22,6 @@ origins = [
     "localhost:3000"
 ]
 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -87,7 +86,7 @@ def read_bookings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
     return bookings
 
 
-@app.get("/bookings/{booking_id}", response_model=schemas.Booking)
+@app.get("/bookings/{booking_id}", response_model=List[schemas.Booking])
 def read_booking(booking_id: str, db: Session = Depends(get_db)):
     booking = crud.get_booking(db, booking_id=booking_id)
     if booking is None:

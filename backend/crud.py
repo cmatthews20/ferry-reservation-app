@@ -44,7 +44,7 @@ def get_bookings(db: Session, skip: int = 0, limit: int = 100):
 
 def get_booking(db: Session, booking_id: str):
     return (
-        db.query(models.Booking).filter(models.Booking.booking_id == booking_id).first()
+        db.query(models.Booking).filter(models.Booking.booking_id == booking_id).all()
     )
 
 
