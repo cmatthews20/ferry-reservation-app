@@ -1,7 +1,7 @@
 """
 CREATE, READ, UPDATE, DELETE functions for the API to use on the database
 """
-
+from sqlalchemy.sql import select
 from sqlalchemy.orm import Session
 import models, schemas
 from datetime import datetime
@@ -15,8 +15,8 @@ def get_schedules(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Schedule).offset(skip).limit(limit).all()
 
 def get_schedules_date(db: Session, start_time: str, end_time: str, skip: int = 0, limit: int = 100):
-    print(models.Schedule.time)
-    return db.query(models.Schedule).filter((models.Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(models.Schedule.time < datetime.strptime(end_time, '%a %b %d %Y'))).offset(skip).limit(limit).all()
+    #return #select([models.Schedule, models.Ferry]).where(models.Schedule.ferry_id==models.Ferry.ferry_id)
+    return db.query(models.Schedule).join(models.Ferry).filter((models.Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(models.Schedule.time < datetime.strptime(end_time, '%a %b %d %Y')),(models.Schedule.ferry_id=='F2345')).offset(skip).limit(limit).all()
 
 def get_ports(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Port).offset(skip).limit(limit).all()
