@@ -8,13 +8,27 @@ in the SQLite database.
 
 from typing import List
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import crud, schemas
 from database import SessionLocal
+from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
+origins = [
+    "http://localhost:3000",
+    "localhost:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 def get_db():
     db = SessionLocal()
@@ -52,6 +66,10 @@ def get_schedule(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
         raise HTTPException(status_code=404, detail="Schedule table is empty")
     return schedule_table
 
+@app.get("/schedules/{start_time}/{end_time}", response_model=List[schemas.Schedule])
+def read_schedules_date(start_time: str , end_time: str,skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    schedules = crud.get_schedules_date(db,start_time=start_time, end_time=end_time, skip=skip, limit=limit)
+    return schedules
 
 @app.get("/ports", response_model=List[schemas.Port])
 def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):

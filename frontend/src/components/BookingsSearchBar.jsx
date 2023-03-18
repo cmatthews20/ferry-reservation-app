@@ -5,7 +5,7 @@ import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Button, Input
 import { Field, Form, Formik } from 'formik';
 import { Search2Icon } from '@chakra-ui/icons'
 
-function BookingsSearchBar() {
+function BookingsSearchBar({handleSearch}) {
     function validateBookingID(value) {
         let error 
         if (!value) {
@@ -19,7 +19,7 @@ function BookingsSearchBar() {
             initialValues={{ booking_id: ''}}
             onSubmit={(values, actions) => {
                 setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2))
+                    handleSearch(values["booking_id"])
                     actions.setSubmitting(false)
                 }, 1000)
             }}

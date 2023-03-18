@@ -4,6 +4,7 @@ CREATE, READ, UPDATE, DELETE functions for the API to use on the database
 
 from sqlalchemy.orm import Session
 import models, schemas
+from datetime import datetime
 
 
 def read_crossings_table(db: Session, skip: int = 0, limit: int = 100):
@@ -21,6 +22,9 @@ def read_crossing_by_id(db: Session, crossing_id: str):
 def read_schedule_table(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Schedule).offset(skip).limit(limit).all()
 
+def get_schedules_date(db: Session, start_time: str, end_time: str, skip: int = 0, limit: int = 100):
+    print(models.Schedule.time)
+    return db.query(models.Schedule).filter((models.Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(models.Schedule.time < datetime.strptime(end_time, '%a %b %d %Y'))).offset(skip).limit(limit).all()
 
 def read_ports_table(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Port).offset(skip).limit(limit).all()
