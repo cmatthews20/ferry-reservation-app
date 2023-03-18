@@ -37,8 +37,8 @@ function Navbar() {
           <Link href="../MyBookings/myBookings">
             <Button colorScheme="">My Bookings</Button>
           </Link>
-          <Link href="/profile">
-            <Button colorScheme="">Profile</Button>
+          <Link href="../BookingsForm/bookingsForm">
+            <Button colorScheme="">Booking Form</Button>
           </Link>
         </GridItem>
         <GridItem area="content">

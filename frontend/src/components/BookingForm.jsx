@@ -54,6 +54,9 @@ function BookingForm () {
       </VStack>
       <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
         <GridItem colSpan={2}>
+          <Heading size='s'>S1234 - Port Bell Island-Port Portugal Cove - Mon 5th May: 22:00</Heading>
+        </GridItem>
+        <GridItem colSpan={2}>
           <FormControl>
             <FormLabel>Full Name</FormLabel>
             <Input
