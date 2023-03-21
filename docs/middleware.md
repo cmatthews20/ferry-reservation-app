@@ -1,5 +1,8 @@
-I had to add :
+# Middleware
 
+I had to add the following snippet in `api.py` to get API calls to work:
+
+```python
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -16,10 +19,8 @@ app.add_middleware(
     allow_methods=[""],
     allow_headers=[""]
 )
+```
 
-in api.py to get api calls to work
+## Why do we need CORSMiddleware? 
 
-Reasoning:
-Why do we need CORSMiddleware? In order to make cross-origin requests -- i.e., requests that originate from a different protocol, IP address, domain name, or port -- you need to enable Cross Origin Resource Sharing (CORS). FastAPI's built-in CORSMiddleware handles this for us.
-
-The above configuration will allow cross-origin requests from our frontend domain and port which will run at localhost:3000.
+In order to make cross-origin requests -- i.e., requests that originate from a different protocol, IP address, domain name, or port -- you need to enable Cross Origin Resource Sharing (CORS). FastAPI's built-in CORSMiddleware handles this for us. The above configuration will allow cross-origin requests from our frontend domain and port which will run at `localhost:3000`.
