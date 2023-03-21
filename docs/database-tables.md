@@ -2,6 +2,8 @@
 
 We spent a lot of time planning the database so that it could completely replace the Government of NL's website AND introduce the new reservation functionality. The columns of the demo database may differ slightly (and some tables, such as pricing, may not be included in initial versions). However, this is what we believe a final version of the database could look like, and what we have modelled our current database after.
 
+Primary keys are in italics.
+
 ## Crossings Table
 
 | *crossing_id* | depart_port | arrive_port |
