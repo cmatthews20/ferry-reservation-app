@@ -1,6 +1,6 @@
 # Middleware
 
-I had to add the following snippet in `api.py` to get API calls to work:
+We had to add the following snippet in `api.py` to get API calls to work:
 
 ```python
 from fastapi.middleware.cors import CORSMiddleware

@@ -18,7 +18,7 @@ Project documentation and design processes can be found in the [docs](./docs/) f
 
 ## How to run
 
-To run the application, 2 terminals will be needed; one for the backend, and one for the frontend.
+To run the application, two terminal instances will be needed; one for the backend, and one for the frontend.
 
 ### Backend
 
