@@ -34,7 +34,7 @@ Primary keys are in italics.
 | --- | --- | --- |
 | Sample Data | Sample Data | Sample Data |
 
-## Bookings
+## Bookings Table
 
 | *booking_id* | user_id | schedule_id | vehicle_id | passengers |
 | --- | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ Primary keys are in italics.
 | --- | --- | --- | --- |
 | Sample Data | Sample Data | Sample Data | Sample Data |
 
-## Users
+## Users Table
 
 | *user_id* | name | email | phone | payment_info |
 | --- | --- | --- | --- |  --- |
