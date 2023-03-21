@@ -49,6 +49,6 @@ Primary keys are in italics.
 
 ## Users
 
-| User_ID | Name | Email | Phone | Payment_Info |
+| *user_id* | name | email | phone | payment_info |
 | --- | --- | --- | --- |  --- |
 | Sample Data | Sample Data | Sample Data | Sample Data | Sample Data |
