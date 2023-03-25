@@ -1,8 +1,9 @@
 """
 CREATE, READ, UPDATE, DELETE functions for the API to use on the database
 """
-
+from sqlalchemy.sql import select
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import joinedload
 import models, schemas
 from datetime import datetime
 
@@ -11,6 +12,14 @@ def read_crossings_table(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Crossing).offset(skip).limit(limit).all()
 
 
+def get_schedules(db: Session, skip: int = 0, limit: int = 100):
+     return db.query(models.Schedule).offset(skip).limit(limit).all()
+
+  
+def get_schedules_data(db: Session, start_time: str, end_time: str, departure_Port: str, arrival_Port: str, skip: int = 0, limit: int = 100):
+    return db.query(models.Ferry.ferry_name,models.Schedule.time,models.Ferry.passenger_capacity,models.Ferry.vehicle_capacity,models.Crossing.depart_port,models.Crossing.arrive_port,models.Port.port_name).join(models.Schedule,models.Schedule.ferry_id==models.Ferry.ferry_id).join(models.Crossing,models.Schedule.crossing_id==models.Crossing.crossing_id).join(models.Port,models.Port.port_id==models.Crossing.depart_port).filter((models.Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(models.Schedule.time < datetime.strptime(end_time, '%a %b %d %Y')),(models.Crossing.depart_port== departure_Port),(models.Crossing.arrive_port== arrival_Port)).offset(skip).limit(limit).all()
+
+  
 def read_crossing_by_id(db: Session, crossing_id: str):
     return (
         db.query(models.Crossing)
@@ -22,12 +31,13 @@ def read_crossing_by_id(db: Session, crossing_id: str):
 def read_schedule_table(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Schedule).offset(skip).limit(limit).all()
 
-def get_schedules_date(db: Session, start_time: str, end_time: str, skip: int = 0, limit: int = 100):
-    print(models.Schedule.time)
-    return db.query(models.Schedule).filter((models.Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(models.Schedule.time < datetime.strptime(end_time, '%a %b %d %Y'))).offset(skip).limit(limit).all()
 
 def read_ports_table(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Port).offset(skip).limit(limit).all()
+
+
+def get_arrivalport(db: Session, port_id: str, skip: int = 0, limit: int = 100):
+    return db.query(models.Crossing, models.Port).join(models.Port, models.Crossing.arrive_port==models.Port.port_id).filter(models.Crossing.depart_port == port_id).all()
 
 
 def read_port_by_id(db: Session, port_id: str):
