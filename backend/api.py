@@ -49,9 +49,10 @@ def read_schedules(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
     schedules = crud.get_schedules(db, skip=skip, limit=limit)
     return schedules
 
-@app.get("/schedules/{start_time}/{end_time}", response_model=List[schemas.Schedule])
-def read_schedules_date(start_time: str , end_time: str,skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    schedules = crud.get_schedules_date(db,start_time=start_time, end_time=end_time, skip=skip, limit=limit)
+@app.get("/schedules/{start_time}/{end_time}/{departure_Port}/{arrival_Port}")
+def read_schedules_date(start_time: str , end_time: str, departure_Port: str, arrival_Port: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    schedules = crud.get_schedules_data(db,start_time=start_time, end_time=end_time, departure_Port=departure_Port, arrival_Port=arrival_Port, skip=skip, limit=limit)
+    print(schedules)
     return schedules
 
 @app.get("/ports", response_model=List[schemas.Port])
@@ -60,9 +61,9 @@ def read_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return ports
 
 
-@app.get("/ports/{port_id}", response_model=schemas.Port)
-def read_port(port_id: str, db: Session = Depends(get_db)):
-    port = crud.get_port(db, port_id=port_id)
+@app.get("/ports/{port_id}")
+def read_port(port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    port = crud.get_arrivalport(db, port_id = port_id, skip=skip, limit=limit)
     if port is None:
         raise HTTPException(status_code=404, detail="Port not found")
     return port

@@ -11,7 +11,6 @@ export default function searchPage() {
         </Head>
         <Navbar/>
         <TableDatePicker/>
-        <h1>First Post</h1>
       </>
     );
   }

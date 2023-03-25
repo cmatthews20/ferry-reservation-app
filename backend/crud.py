@@ -3,6 +3,7 @@ CREATE, READ, UPDATE, DELETE functions for the API to use on the database
 """
 from sqlalchemy.sql import select
 from sqlalchemy.orm import Session
+from sqlalchemy.orm import joinedload
 import models, schemas
 from datetime import datetime
 
@@ -12,18 +13,17 @@ def get_crossings(db: Session, skip: int = 0, limit: int = 100):
 
 
 def get_schedules(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Schedule).offset(skip).limit(limit).all()
+     return db.query(models.Schedule).offset(skip).limit(limit).all()
 
-def get_schedules_date(db: Session, start_time: str, end_time: str, skip: int = 0, limit: int = 100):
-    #return #select([models.Schedule, models.Ferry]).where(models.Schedule.ferry_id==models.Ferry.ferry_id)
-    return db.query(models.Schedule).join(models.Ferry).filter((models.Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(models.Schedule.time < datetime.strptime(end_time, '%a %b %d %Y')),(models.Schedule.ferry_id=='F2345')).offset(skip).limit(limit).all()
+def get_schedules_data(db: Session, start_time: str, end_time: str, departure_Port: str, arrival_Port: str, skip: int = 0, limit: int = 100):
+    return db.query(models.Ferry.ferry_name,models.Schedule.time,models.Ferry.passenger_capacity,models.Ferry.vehicle_capacity,models.Crossing.depart_port,models.Crossing.arrive_port,models.Port.port_name).join(models.Schedule,models.Schedule.ferry_id==models.Ferry.ferry_id).join(models.Crossing,models.Schedule.crossing_id==models.Crossing.crossing_id).join(models.Port,models.Port.port_id==models.Crossing.depart_port).filter((models.Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(models.Schedule.time < datetime.strptime(end_time, '%a %b %d %Y')),(models.Crossing.depart_port== departure_Port),(models.Crossing.arrive_port== arrival_Port)).offset(skip).limit(limit).all()
+
 
 def get_ports(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Port).offset(skip).limit(limit).all()
 
-
-def get_port(db: Session, port_id: str):
-    return db.query(models.Port).filter(models.Port.port_id == port_id).first()
+def get_arrivalport(db: Session, port_id: str, skip: int = 0, limit: int = 100):
+    return db.query(models.Crossing, models.Port).join(models.Port, models.Crossing.arrive_port==models.Port.port_id).filter(models.Crossing.depart_port == port_id).all()
 
 
 def get_entities(db: Session, skip: int = 0, limit: int = 100):
