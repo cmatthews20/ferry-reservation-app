@@ -1,5 +1,5 @@
 """
-Database models/classes (ORM Models) used by SQLAlchemy and CRUD operations.
+Database models/classes (ORM Models) used by SQLAlchemy and CRUD methods.
 """
 
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
@@ -22,6 +22,14 @@ class Crossing(BaseClass):
 
     def get_row(db: Session, crossing_id: str):
         return db.query(Crossing).filter(Crossing.crossing_id == crossing_id).all()
+
+    def get_arrival_port(db: Session, port_id: str, skip: int = 0, limit: int = 100):
+        return (
+            db.query(Crossing, Port)
+            .join(Port, Crossing.arrive_port == Port.port_id)
+            .filter(Crossing.depart_port == port_id)
+            .all()
+        )
 
 
 class Schedule(BaseClass):
@@ -46,6 +54,39 @@ class Schedule(BaseClass):
             .filter(
                 (Schedule.time >= datetime.strptime(start_time, "%a %b %d %Y")),
                 (Schedule.time < datetime.strptime(end_time, "%a %b %d %Y")),
+            )
+            .offset(skip)
+            .limit(limit)
+            .all()
+        )
+
+    def get_data(
+        db: Session,
+        start_time: str,
+        end_time: str,
+        departure_Port: str,
+        arrival_Port: str,
+        skip: int = 0,
+        limit: int = 100,
+    ):
+        return (
+            db.query(
+                Ferry.ferry_name,
+                Schedule.time,
+                Ferry.passenger_capacity,
+                Ferry.vehicle_capacity,
+                Crossing.depart_port,
+                Crossing.arrive_port,
+                Port.port_name,
+            )
+            .join(Schedule, Schedule.ferry_id == Ferry.ferry_id)
+            .join(Crossing, Schedule.crossing_id == Crossing.crossing_id)
+            .join(Port, Port.port_id == Crossing.depart_port)
+            .filter(
+                (Schedule.time >= datetime.strptime(start_time, "%a %b %d %Y")),
+                (Schedule.time < datetime.strptime(end_time, "%a %b %d %Y")),
+                (Crossing.depart_port == departure_Port),
+                (Crossing.arrive_port == arrival_Port),
             )
             .offset(skip)
             .limit(limit)

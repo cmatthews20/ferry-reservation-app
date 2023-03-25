@@ -1,9 +1,5 @@
 """
 This is the main API file for back-end endpoint management.
-FastAPI is a modern, high-performance web framework for building APIs with Python.
-We are using FastAPI to build the backend of our application to make calls to and from the database.
-Doing this allows us to read and write to the database and helps the front-end components use the data 
-in the SQLite database.
 """
 
 from typing import List
@@ -45,15 +41,15 @@ async def root():
 def get_crossings_table(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     crossings_table = models.Crossing.get_table(db, skip=skip, limit=limit)
     if crossings_table == []:
-        raise HTTPException(status_code=404, detail="Crossings table is empty")
+        raise HTTPException(status_code=404, detail="Empty response")
     return crossings_table
 
 
 @app.get("/crossings/{crossing_id}", response_model=List[schemas.Crossing])
 def get_crossings_row(crossing_id: str, db: Session = Depends(get_db)):
     crossing = models.Crossing.get_row(db, crossing_id=crossing_id)
-    if crossing is None:
-        raise HTTPException(status_code=404, detail="Crossing not found")
+    if crossing == []:
+        raise HTTPException(status_code=404, detail="Empty response")
     return crossing
 
 
@@ -61,7 +57,7 @@ def get_crossings_row(crossing_id: str, db: Session = Depends(get_db)):
 def get_schedule(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     schedule_table = models.Schedule.get_table(db, skip=skip, limit=limit)
     if schedule_table == []:
-        raise HTTPException(status_code=404, detail="Schedule table is empty")
+        raise HTTPException(status_code=404, detail="Empty response")
     return schedule_table
 
 
@@ -75,7 +71,7 @@ def read_schedules_date(
     limit: int = 100,
     db: Session = Depends(get_db),
 ):
-    schedules = crud.get_schedules_data(
+    schedules = models.Schedule.get_data(
         db,
         start_time=start_time,
         end_time=end_time,
@@ -84,7 +80,6 @@ def read_schedules_date(
         skip=skip,
         limit=limit,
     )
-    print(schedules)
     return schedules
 
 
@@ -98,9 +93,9 @@ def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_port(
     port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 ):
-    port = crud.get_arrivalport(db, port_id=port_id, skip=skip, limit=limit)
-    if port is None:
-        raise HTTPException(status_code=404, detail="Port not found")
+    port = models.Crossing.get_arrival_port(db, port_id=port_id, skip=skip, limit=limit)
+    if port == []:
+        raise HTTPException(status_code=404, detail="Empty response")
     return port
 
 
@@ -120,7 +115,7 @@ def get_prices(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def get_bookings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     bookings_table = models.Booking.get_table(db, skip=skip, limit=limit)
     if bookings_table == []:
-        raise HTTPException(status_code=404, detail="Booking table is empty")
+        raise HTTPException(status_code=404, detail="Empty response")
     return bookings_table
 
 
@@ -128,7 +123,7 @@ def get_bookings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
 def get_booking(booking_id: str, db: Session = Depends(get_db)):
     booking = models.Booking.get_row(db, booking_id=booking_id)
     if booking == []:
-        raise HTTPException(status_code=404, detail="Booking not found")
+        raise HTTPException(status_code=404, detail="Empty response")
     return booking
 
 
