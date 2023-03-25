@@ -15,7 +15,7 @@
 
 `python -m pip install fastapi uvicorn[standard]`
 
-*Troubleshooting: Can try `pip install --user uvicorn` when error thrown for uvicorn module not found*
+*Troubleshooting: Can try `pip install --user uvicorn` when error thrown for `uvicorn module not found`
 
 - To run the server - go to the backend directory and run the following code (since api.py has the api, we use api:app):
 
@@ -27,4 +27,3 @@
     - api: the file api.py (the Python "module").
     - app: the object created inside of api.py with the line app = FastAPI().
     - --reload: make the server restart after code changes. Only use for development.
-

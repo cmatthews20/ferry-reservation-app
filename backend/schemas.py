@@ -2,8 +2,6 @@
 Pydantic models (schemas). These classes model the data for the API.
 """
 
-from typing import List, Union
-
 from pydantic import BaseModel
 
 
@@ -97,16 +95,13 @@ class BookingBase(BaseModel):
 
 
 class BookingCreate(BookingBase):
-    booking_id: str
-    user_id: str
-    schedule_id: str
-    vehicle_id: str
-    passengers: str
+    pass
 
 
 class Booking(BookingBase):
     class Config:
         orm_mode = True
+
 
 class FerryBase(BaseModel):
     ferry_name: str
