@@ -17,4 +17,12 @@ Option 2:
 - PostgreSQL - Database (in a dialect of SQL)
 - ChakraUI/MaterialUI (TailwindCSS to write our own UI) - UI library
 - BCrypt - Password Encryption (for passwords stored in the database)
-- JWT - Need a way to do user sessions
+- JWT - User sessions
+
+**Option 3 (the one we went with):**
+
+- Next.js - Frontend Framework
+- ChakraUI - UI component library
+- FastAPI - Backend
+- SQLite - Database
+- SQLAlchemy - Object Relational Mapper

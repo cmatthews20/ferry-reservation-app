@@ -48,6 +48,6 @@ export default function Home() {
 
 1. Just to get a sample page going, `components` folder was created. This folder contains the `.jsx` react files for individual UI components. I created a Navbar and put it on the homepage (which is crossings for now). Then I just did a mockup table for crossings (in the homepage index file).
 
-2. For demo purposes we are using SQLite database...I just created a database folder with a database file...that should work fine, I verified it in DataGrip. When deployment comes around, we may want to consider using Docker and PostgreSQL. WE can install docker by installing docker desktop since it comes with the required dependencies (https://www.docker.com/products/docker-desktop/). To create a new docker container with postgres running inside, run the following command in project root:
+2. For demo purposes we are using SQLite database...I just created a database folder with a database file...that should work fine, I verified it in DataGrip. When deployment comes around, we may want to consider using Docker and PostgreSQL. We can install docker by installing docker desktop since it comes with the required dependencies (https://www.docker.com/products/docker-desktop/). To create a new docker container with postgres running inside, run the following command in project root:
 
 `docker run --name frs-db -p 5432:5432 -e POSTGRES_USER=frs -e POSTGRES_PASSWORD=password -d postgres`
