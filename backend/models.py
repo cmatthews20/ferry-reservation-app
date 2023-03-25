@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 import schemas
 
+
 class Crossing(BaseClass):
     __tablename__ = "crossings"
 
@@ -18,7 +19,7 @@ class Crossing(BaseClass):
 
     def get_table(db: Session, skip: int = 0, limit: int = 100):
         return db.query(Crossing).offset(skip).limit(limit).all()
-    
+
     def get_row(db: Session, crossing_id: str):
         return db.query(Crossing).filter(Crossing.crossing_id == crossing_id).all()
 
@@ -37,9 +38,19 @@ class Schedule(BaseClass):
     def get_table(db: Session, skip: int = 0, limit: int = 100):
         return db.query(Schedule).offset(skip).limit(limit).all()
 
-    def get_rows_by_date(db: Session, start_time: str, end_time: str, skip: int = 0, limit: int = 100):
-        return db.query(Schedule).filter((Schedule.time >= datetime.strptime(start_time, '%a %b %d %Y')),(Schedule.time < datetime.strptime(end_time, '%a %b %d %Y'))).offset(skip).limit(limit).all()
-
+    def get_rows_by_date(
+        db: Session, start_time: str, end_time: str, skip: int = 0, limit: int = 100
+    ):
+        return (
+            db.query(Schedule)
+            .filter(
+                (Schedule.time >= datetime.strptime(start_time, "%a %b %d %Y")),
+                (Schedule.time < datetime.strptime(end_time, "%a %b %d %Y")),
+            )
+            .offset(skip)
+            .limit(limit)
+            .all()
+        )
 
 
 class Port(BaseClass):
@@ -97,25 +108,22 @@ class Booking(BaseClass):
 
     def get_row(db: Session, booking_id: str):
         return db.query(Booking).filter(Booking.booking_id == booking_id).all()
-    
+
     def create_row(db: Session, booking: schemas.BookingCreate):
         new_booking = Booking(
-        booking_id=booking.booking_id,
-        user_id=booking.user_id,
-        schedule_id=booking.schedule_id,
-        vehicle_id=booking.vehicle_id,
-        passengers=booking.passengers,
+            booking_id=booking.booking_id,
+            user_id=booking.user_id,
+            schedule_id=booking.schedule_id,
+            vehicle_id=booking.vehicle_id,
+            passengers=booking.passengers,
         )
         db.add(new_booking)
         db.commit()
         db.refresh(new_booking)
         return new_booking
 
-
     def delete_by_id(db: Session, booking_id: str):
-        booking = (
-        db.query(Booking).filter(Booking.booking_id == booking_id).first()
-        )
+        booking = db.query(Booking).filter(Booking.booking_id == booking_id).first()
         db.delete(booking)
         db.commit()
         return

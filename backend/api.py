@@ -17,18 +17,16 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:3000",
-    "localhost:3000"
-]
+origins = ["http://localhost:3000", "localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
+
 
 def get_db():
     db = SessionLocal()
@@ -66,11 +64,29 @@ def get_schedule(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
         raise HTTPException(status_code=404, detail="Schedule table is empty")
     return schedule_table
 
+
 @app.get("/schedules/{start_time}/{end_time}/{departure_Port}/{arrival_Port}")
-def read_schedules_date(start_time: str , end_time: str, departure_Port: str, arrival_Port: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    schedules = crud.get_schedules_data(db,start_time=start_time, end_time=end_time, departure_Port=departure_Port, arrival_Port=arrival_Port, skip=skip, limit=limit)
+def read_schedules_date(
+    start_time: str,
+    end_time: str,
+    departure_Port: str,
+    arrival_Port: str,
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+):
+    schedules = crud.get_schedules_data(
+        db,
+        start_time=start_time,
+        end_time=end_time,
+        departure_Port=departure_Port,
+        arrival_Port=arrival_Port,
+        skip=skip,
+        limit=limit,
+    )
     print(schedules)
     return schedules
+
 
 @app.get("/ports", response_model=List[schemas.Port])
 def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
@@ -79,8 +95,10 @@ def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 @app.get("/ports/{port_id}")
-def read_port(port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    port = crud.get_arrivalport(db, port_id = port_id, skip=skip, limit=limit)
+def read_port(
+    port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
+):
+    port = crud.get_arrivalport(db, port_id=port_id, skip=skip, limit=limit)
     if port is None:
         raise HTTPException(status_code=404, detail="Port not found")
     return port
