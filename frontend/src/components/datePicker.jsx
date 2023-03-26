@@ -1,5 +1,6 @@
 //The date picker component fot the search bar
 import React, { useState, useEffect } from "react";
+import Link from 'next/link';
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -215,7 +216,7 @@ export default function TableDatePicker() {
             />
           </GridItem>
           <GridItem colSpan={1}>
-            <button
+            <Button
               onClick={() =>
                 fetchSchedule(
                   startDate.toDateString(),
@@ -224,17 +225,11 @@ export default function TableDatePicker() {
                   Object.values(selectedArrivalPort)[0]
                 )
               }
-              style={{
-                backgroundColor: "blue",
-                color: "white",
-                padding: "0.5rem 1rem",
-                borderRadius: "0.25rem",
-                cursor: "pointer",
-                width: "100%",
-              }}
+              colorScheme='blue' 
+              w="100%"
             >
-              Click me!
-            </button>
+              Search!
+            </Button>
           </GridItem>
         </SimpleGrid>
         <Heading style={{ textAlign: "center" }}>Available Crossings</Heading>
@@ -277,6 +272,16 @@ export default function TableDatePicker() {
                       </td>
                       <td>{value.passenger_capacity}</td>
                       <td>{value.vehicle_capacity}</td>
+                      <td>
+                      <Link
+                      href={{
+                        pathname: '../BookingsForm/bookingsForm',
+                        query: {schedule_id: value.schedule_id}
+                      }}
+                      >
+                      <Button colorScheme='blue' size='lg' w="100%">Create Booking</Button>
+                      </Link>
+                      </td>
                     </tr>
                   );
                 })}
