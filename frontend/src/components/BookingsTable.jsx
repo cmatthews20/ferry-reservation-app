@@ -28,11 +28,7 @@ export default function BookingsTable() {
   //callback function from search bar to table
   function handleSearch(booking_id) {
     fetchBookingData(booking_id);
-    console.log("Before fetchPortsData");
-    console.log(dataWithPorts);
     fetchPortsData();
-    console.log("After fetchPortsData");
-    console.log(dataWithPorts);
   }
 
   // GET request for booking data to DB
@@ -69,8 +65,6 @@ export default function BookingsTable() {
       }
       const result = await response.json();
       setPortsData(result);
-      console.log("Inside ports data");
-      console.log(dataWithPorts);
       return result;
     } catch (err) {
       console.log(err);
@@ -94,7 +88,7 @@ export default function BookingsTable() {
     });
   };
 
-  if (bookingData !== null && portsData !== null) {
+  if (bookingData.length !== 0 && portsData.length !== 0) {
     dataWithPorts = getDataWithPorts();
   }
 
