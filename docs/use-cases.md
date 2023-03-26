@@ -1,5 +1,7 @@
 # Use Cases
 
+## Initial Demo
+
 It is intended that the following use cases will be implemented by March 21, 2023:
 
 ### 1. Name: View schedule
@@ -88,6 +90,8 @@ i. Alternate process:
     ii. The system prompts the user to input a valid ID.
 
 
+## Final Demo
+
 It is intended that the following use cases, as well as those in the previous section, will be implemented by March 28, 2023:
 
 ### 1. Name: Email booking confirmation
@@ -113,6 +117,7 @@ h. Standard process:
 i. Alternate process:
     i. Invalid email is input.
     ii. User does not receive an itinerary email.
+
 
 ### 2. Name: Cancel booking
 
