@@ -152,3 +152,9 @@ def get_ferries(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users_table = models.User.get_table(db, skip=skip, limit=limit)
     return users_table
+
+
+@app.get("/booking_data/{booking_Id}")
+def get_booking_data(booking_Id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    booking_data = models.Booking.booking_data(db, booking_Id=booking_Id, skip=skip, limit=limit)
+    return booking_data
