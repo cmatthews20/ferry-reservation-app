@@ -169,6 +169,15 @@ class Booking(BaseClass):
         db.commit()
         return
 
+    def booking_data(db: Session, booking_Id: str, skip: int = 0, limit: int = 100):
+        return (
+            db.query(User, Booking, Schedule)
+            .join(Booking, User.user_id == Booking.user_id)
+            .join(Schedule, Booking.schedule_id == Schedule.schedule_id)
+            .filter(Booking.booking_id==booking_Id)
+            .all()
+        )
+
 
 class Ferry(BaseClass):
     __tablename__ = "ferries"
