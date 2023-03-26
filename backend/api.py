@@ -88,7 +88,14 @@ def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     ports_table = models.Port.get_table(db, skip=skip, limit=limit)
     return ports_table
 
+@app.get("/port/{port_id}", response_model=List[schemas.Port])
+def get_port(port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    port = models.Port.get_row(db, port_id=port_id)
+    if port == []:
+        raise HTTPException(status_code=404, detail="Empty response")
+    return port
 
+# TODO: change this to /arrival_port/
 @app.get("/ports/{port_id}")
 def read_port(
     port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
@@ -156,5 +163,5 @@ def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 @app.get("/booking_data/{booking_Id}")
 def get_booking_data(booking_Id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    booking_data = models.Booking.booking_data(db, booking_Id=booking_Id, skip=skip, limit=limit)
+    booking_data = models.Booking.get_data(db, booking_Id=booking_Id, skip=skip, limit=limit)
     return booking_data
