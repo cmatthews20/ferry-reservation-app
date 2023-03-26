@@ -1,5 +1,5 @@
 """
-Pydantic models (schemas). These classes model the data for the API.
+Pydantic models (schemas). These classes define the shemas for the API.
 """
 
 from pydantic import BaseModel
