@@ -163,5 +163,5 @@ def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 @app.get("/booking_data/{booking_Id}")
 def get_booking_data(booking_Id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    booking_data = models.Booking.booking_data(db, booking_Id=booking_Id, skip=skip, limit=limit)
+    booking_data = models.Booking.get_data(db, booking_Id=booking_Id, skip=skip, limit=limit)
     return booking_data

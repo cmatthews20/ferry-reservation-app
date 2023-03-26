@@ -169,7 +169,7 @@ class Booking(BaseClass):
         db.commit()
         return
 
-    def booking_data(db: Session, booking_Id: str, skip: int = 0, limit: int = 100):
+    def get_data(db: Session, booking_Id: str, skip: int = 0, limit: int = 100):
         return (
             db.query(User, Booking, Schedule, Crossing)
             .join(Booking, User.user_id == Booking.user_id)
