@@ -6,8 +6,11 @@ import React from "react";
 import BookingForm from "../../components/BookingForm"
 import { DarkModeSwitch } from "../../components/DarkModeSwitch";
 import Navbar from '../../components/Navbar.jsx';
+import { useRouter } from 'next/router'
 
 export default function BookingsForm() {
+  const router = useRouter();
+  const schedule_Id = router.query;
   return (
     <>
     <Navbar />

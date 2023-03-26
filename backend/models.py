@@ -71,6 +71,7 @@ class Schedule(BaseClass):
     ):
         return (
             db.query(
+                Schedule.schedule_id,
                 Ferry.ferry_name,
                 Schedule.time,
                 Ferry.passenger_capacity,
