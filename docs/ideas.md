@@ -13,3 +13,5 @@ Do before final demo:
 - Improve error handling
 
 - Navbar button highlighting to show what page the user is on
+
+- Make landing page title
