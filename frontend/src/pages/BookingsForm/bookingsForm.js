@@ -19,7 +19,7 @@ export default function BookingsForm() {
           <VStack>
             <Heading as='h2' size='2xl'>Booking Form</Heading>
                 <Box>
-                    <BookingForm />
+                    <BookingForm scheduleId={schedule_Id.schedule_id} />
                 </Box>
           </VStack>
       </Box>

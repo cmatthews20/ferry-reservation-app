@@ -18,7 +18,10 @@ import {
 import { PhoneIcon, EmailIcon, AddIcon } from '@chakra-ui/icons'
 import React, { useState } from 'react'
 
-function BookingForm () {
+const API_HOST = "http://127.0.0.1:8000";
+const CREATE_BOOKING_API_URL = `${API_HOST}/create_booking`;
+
+function BookingForm ({ scheduleId }) {
   const [addFormData, setAddFormData] = useState({
     name: '',
     phone: '',
@@ -26,6 +29,29 @@ function BookingForm () {
     passengers: '',
     vehicle: ''
   })
+
+  function createBooking(name, email, phone, schedule_id, vehicle_id, passengers) {
+    const url = `${CREATE_BOOKING_API_URL}?name=${name}&email=${email}&phone=${phone}&schedule_id=${schedule_id}&vehicle_id=${vehicle_id}&passengers=${passengers}`;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(url, options)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 
   const handleAddFormChange = event => {
     const fieldName = event.target.getAttribute('name')
@@ -45,8 +71,8 @@ function BookingForm () {
       passengers: addFormData.passengers,
       vehicle: addFormData.vehicle
     }
-
     console.log(newBooking)
+    createBooking(newBooking.name, newBooking.email, newBooking.phone, scheduleId, newBooking.vehicle, newBooking.passengers)
   }
 
   return (
@@ -57,7 +83,7 @@ function BookingForm () {
       </VStack>
       <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
         <GridItem colSpan={2}>
-          <Heading size='s'>S1234 - Port Bell Island-Port Portugal Cove - Mon 5th May: 22:00</Heading>
+          <Heading size='s'>{scheduleId} - Port Bell Island-Port Portugal Cove - Mon 5th May: 22:00 (DEMO DATA)</Heading>
         </GridItem>
         <GridItem colSpan={2}>
           <FormControl>
