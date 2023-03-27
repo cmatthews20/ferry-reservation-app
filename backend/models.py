@@ -233,13 +233,13 @@ class User(BaseClass):
     def is_code_unique(unique_code: str, db: Session) -> bool:
         user = db.query(User).filter_by(user_id=unique_code).first()
         return user is None
-    
+
     def is_email_unique(email: str, db: Session) -> bool:
         email = db.query(User).filter_by(email=email).first()
         return email is None
-    
+
     def get_user_by_email(email: str, db: Session):
-        email_row = db.query(User.user_id).filter_by(email=email).first()  
+        email_row = db.query(User.user_id).filter_by(email=email).first()
         if email_row is not None:
             return email_row.user_id
         else:

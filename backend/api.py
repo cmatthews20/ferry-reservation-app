@@ -184,8 +184,6 @@ def create_booking(
     phone: str,
     vehicle_id: str,
     passengers: str = "0",
-    skip: int = 0,
-    limit: int = 100,
     db: Session = Depends(get_db),
 ):
     user_id = models.User.get_user_by_email(email, db)
@@ -197,7 +195,6 @@ def create_booking(
             unique_number = str(uuid.uuid4().int)[:4]
             user_id = f"U{unique_number}"
 
-        # create user record
         try:
             models.User.create_row(
                 db, user_id=user_id, name=name, email=email, phone=phone
@@ -211,7 +208,6 @@ def create_booking(
         unique_number = str(uuid.uuid4().int)[:4]
         booking_id = f"B{unique_number}"
 
-    # create booking record
     try:
         models.Booking.create_booking(
             db=db,
