@@ -11,7 +11,7 @@ function LandingPage() {
     >
       <AbsoluteCenter>
       <Link href="/SearchPage/searchPage">
-        <Button colorScheme='blue' size='lg'>Continue as Guest</Button>
+        <Button colorScheme='yellow' size='lg'>Continue as Guest</Button>
       </Link>
       </AbsoluteCenter>
       
