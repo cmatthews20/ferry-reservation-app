@@ -12,6 +12,7 @@ Project documentation and design processes can be found in the [docs](./docs/) f
 
 | Link | Description |
 | --- | --- |
+| [Troubleshooting](docs/troubleshooting.md) | Common error codes upon app startup and some possible fixes. |
 | [Current Database](docs/database-tables.md) | The format of the desired/current database tables. |
 | [Use Cases](docs/use-cases.md) | Use cases from project proposal. Initial cases have been implemented successfully. |
 | [ORM](docs/orm.md) | What is an ORM? Why are we using an ORM? |
@@ -25,7 +26,7 @@ Project documentation and design processes can be found in the [docs](./docs/) f
 | [Current Stack Setup](docs/stack-setup-steps.md) | Detailed steps taken during initial setup of the current stack. |
 | [Code Formatting](docs/code-formatting.md) | We used a Python code formatter to ensure consistent .py file code styling. |
 | [Middleware](docs/middleware.md) | CORSMiddleware was used to make cross-origin requests. |
-| [Backend](docs/backend.md) | Additional notes for backend setup and troubleshooting. |
+| [Backend](docs/backend.md) | Additional notes for backend setup and info. |
 | [Vercel and Next.js](docs/vercel-nextjs.md) | Future deployment with Vercel and more Next.js info. |
 | [Ideas and TODO](docs/ideas.md) | TODO list and unfiltered feature ideas we could implement after the course is over. |
 | [Reading List](docs/reading-list.md) | Useful links for future/past work |
