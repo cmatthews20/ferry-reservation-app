@@ -1,16 +1,15 @@
 /*
 This is the bookings table component that uses the Bookings Search Bar component to display searched bookings
 */
+
 import React, { useState } from "react";
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
 import BookingsSearchBar from "./BookingsSearchBar";
@@ -20,18 +19,15 @@ const BOOKING_API_URL = `${API_HOST}/booking_data`;
 const PORTS_API_URL = `${API_HOST}/ports`;
 
 export default function BookingsTable() {
-  // setting up the state hook
   const [bookingData, setBookingData] = useState([]);
   const [portsData, setPortsData] = useState([]);
   var dataWithPorts = [];
 
-  //callback function from search bar to table
   function handleSearch(booking_id) {
     fetchBookingData(booking_id);
     fetchPortsData();
   }
 
-  // GET request for booking data to DB
   async function fetchBookingData(BOOKING_ID) {
     try {
       const response = await fetch(`${BOOKING_API_URL}/${BOOKING_ID}`, {
@@ -51,7 +47,6 @@ export default function BookingsTable() {
     }
   }
 
-  // GET request for ports data to DB
   async function fetchPortsData() {
     try {
       const response = await fetch(`${PORTS_API_URL}`, {
@@ -72,7 +67,6 @@ export default function BookingsTable() {
   }
 
   const getDataWithPorts = () => {
-    // Combine booking data with port data
     return bookingData.map((item) => {
       const arrivalPort = portsData.find(
         (port) => port.port_id === item.Crossing.arrive_port

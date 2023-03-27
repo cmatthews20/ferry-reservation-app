@@ -1,4 +1,5 @@
 //The date picker component fot the search bar
+
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import Select from "react-select";
@@ -10,27 +11,15 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
-  Td,
-  TableCaption,
   TableContainer,
   SimpleGrid,
   GridItem,
 } from "@chakra-ui/react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Heading,
-  Flex,
-} from "@chakra-ui/react";
+import {Heading,} from "@chakra-ui/react";
 import {
   Button,
-  ButtonGroup,
-  Stack,
   VStack,
   StackDivider,
 } from "@chakra-ui/react";

@@ -52,6 +52,8 @@ pip install -r requirements.txt
 
 ```bash
 uvicorn api:app --reload
+#or
+python -m uvicorn api:app --reload
 ```
 
 ### Frontend

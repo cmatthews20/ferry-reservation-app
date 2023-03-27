@@ -3,11 +3,9 @@ This is the Navbar component that is displayed at the top of every page in the a
 It contains the links to direct users to the different pages.
 */
 import {
-    ChakraProvider,
     Button,
     Grid,
     GridItem,
-    Image,
   } from "@chakra-ui/react";
 import Link from 'next/link';
 
@@ -33,9 +31,6 @@ function Navbar() {
           </Link>
           <Link href="../Bookings/bookings">
             <Button colorScheme="">Bookings</Button>
-          </Link>
-          <Link href="../MyBookings/myBookings">
-            <Button colorScheme="">My Bookings</Button>
           </Link>
           <Link href="../BookingsForm/bookingsForm">
             <Button colorScheme="">Booking Form</Button>

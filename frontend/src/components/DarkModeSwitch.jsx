@@ -2,6 +2,7 @@
 This is a Dark Mode switch that toggles the colour of the website from light mode to dark mode.
 It is a UI feature for the application to make it more accessible to the users.
 */
+
 import { useColorMode, Switch } from "@chakra-ui/react";
 
 export const DarkModeSwitch = () => {
