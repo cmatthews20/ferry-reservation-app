@@ -6,13 +6,12 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
+
 import BookingsSearchBar from "./BookingsSearchBar";
 
 const API_HOST = "http://127.0.0.1:8000";
@@ -20,18 +19,15 @@ const BOOKING_API_URL = `${API_HOST}/booking_data`;
 const PORTS_API_URL = `${API_HOST}/ports`;
 
 export default function BookingsTable() {
-  // setting up the state hook
   const [bookingData, setBookingData] = useState([]);
   const [portsData, setPortsData] = useState([]);
   var dataWithPorts = [];
 
-  //callback function from search bar to table
   function handleSearch(booking_id) {
     fetchBookingData(booking_id);
     fetchPortsData();
   }
 
-  // GET request for booking data to DB
   async function fetchBookingData(BOOKING_ID) {
     try {
       const response = await fetch(`${BOOKING_API_URL}/${BOOKING_ID}`, {
@@ -51,7 +47,6 @@ export default function BookingsTable() {
     }
   }
 
-  // GET request for ports data to DB
   async function fetchPortsData() {
     try {
       const response = await fetch(`${PORTS_API_URL}`, {
@@ -72,7 +67,6 @@ export default function BookingsTable() {
   }
 
   const getDataWithPorts = () => {
-    // Combine booking data with port data
     return bookingData.map((item) => {
       const arrivalPort = portsData.find(
         (port) => port.port_id === item.Crossing.arrive_port
@@ -96,17 +90,17 @@ export default function BookingsTable() {
     <>
       <BookingsSearchBar handleSearch={handleSearch} />
       <TableContainer>
-        <Table variant="simple">
+        <Table variant="simple" style={{ textAlign: "center" }}>
           <Thead>
             <Tr>
-              <Th>booking_id</Th>
-              <Th>name</Th>
-              <Th>phone</Th>
+              <Th>Booking ID</Th>
+              <Th>Name</Th>
+              <Th>Phone</Th>
               <Th>Depart Port</Th>
               <Th>Arrive Port</Th>
               <Th>Date and Time</Th>
-              <Th>personal vehicle</Th>
-              <Th>additional passengers</Th>
+              <Th>Personal Vehicle</Th>
+              <Th>Additional Passengers</Th>
             </Tr>
           </Thead>
           <Tbody>
