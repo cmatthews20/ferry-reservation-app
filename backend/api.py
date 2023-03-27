@@ -199,7 +199,7 @@ def create_booking(
 
         # create user record
         try:
-            # models.User.create_row(db,user_id=user_id, name=name, email=email,phone=phone)
+            models.User.create_row(db,user_id=user_id, name=name, email=email,phone=phone)
             print(
                 {"user_id": user_id, "name I got": name, "email": email, "phone": phone}
             )
@@ -214,7 +214,7 @@ def create_booking(
 
     # create booking record
     try:
-        # models.Booking.create_booking(db=db, booking_id=booking_id, user_id=user_id, schedule_id=schedule_id, vehicle_id=vehicle_id, passengers=passengers)
+        models.Booking.create_booking(db=db, booking_id=booking_id, user_id=user_id, schedule_id=schedule_id, vehicle_id=vehicle_id, passengers=passengers)
         print(
             {
                 "booking_id": booking_id,
@@ -235,16 +235,4 @@ def create_booking(
         "schedule_id": schedule_id,
         "vehicle_id": vehicle_id,
         "passengers": passengers,
-    }
-
-
-@app.post("/create_booking_json")
-def create_booking(booking_data: dict):
-        return {
-        "name I got": booking_data["name"],
-        "email": booking_data["email"],
-        "phone": booking_data["phone"],
-        "schedule_id": booking_data["schedule_id"],
-        "vehicle_id": booking_data["vehicle_id"],
-        "passengers": booking_data["passengers"],
     }
