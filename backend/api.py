@@ -227,10 +227,11 @@ def create_booking(
     except Exception as e:
         raise e
 
-    try:
-        models.Schedule.update_vehicles(db=db, schedule_id=schedule_id)
-    except Exception as e:
-        raise e
+    if (vehicle_id == "Yes"):
+        try:
+            models.Schedule.update_vehicles(db=db, schedule_id=schedule_id)
+        except Exception as e:
+            raise e
 
     return {
         "user_id": user_id,
