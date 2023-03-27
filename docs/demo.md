@@ -1,3 +1,3 @@
 # Demo Screenshots
 
-![Crossings Page](crossings-page.jpg)
+![Crossings Page](images/crossings-page.jpg)
