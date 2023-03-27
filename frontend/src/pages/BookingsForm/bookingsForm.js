@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 
 export default function BookingsForm() {
   const router = useRouter();
-  const schedule_Id = router.query;
+  const schedule_data = router.query;
   return (
     <>
     <Navbar />
@@ -19,7 +19,7 @@ export default function BookingsForm() {
           <VStack>
             <Heading as='h2' size='2xl'>Booking Form</Heading>
                 <Box>
-                    <BookingForm />
+                    <BookingForm schedule_data={schedule_data} />
                 </Box>
           </VStack>
       </Box>
