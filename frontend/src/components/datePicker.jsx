@@ -265,7 +265,7 @@ export default function TableDatePicker() {
                           }}
                         >
                           <Button colorScheme="blue" size="lg" w="100%">
-                            Create Booking
+                            Book
                           </Button>
                         </Link>
                       </td>
