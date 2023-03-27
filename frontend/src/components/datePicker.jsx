@@ -1,6 +1,6 @@
 //The date picker component fot the search bar
 import React, { useState, useEffect } from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -225,7 +225,7 @@ export default function TableDatePicker() {
                   Object.values(selectedArrivalPort)[0]
                 )
               }
-              colorScheme='blue' 
+              colorScheme="blue"
               w="100%"
             >
               Search!
@@ -273,14 +273,22 @@ export default function TableDatePicker() {
                       <td>{value.passenger_capacity}</td>
                       <td>{value.vehicle_capacity}</td>
                       <td>
-                      <Link
-                      href={{
-                        pathname: '../BookingsForm/bookingsForm',
-                        query: {schedule_id: value.schedule_id}
-                      }}
-                      >
-                      <Button colorScheme='blue' size='lg' w="100%">Create Booking</Button>
-                      </Link>
+                        <Link
+                          href={{
+                            pathname: "../BookingsForm/bookingsForm",
+                            query: {
+                              schedule_id: value.schedule_id,
+                              ferry_name: value.ferry_name,
+                              depart_port: value.depart_port,
+                              arrive_port: value.arrive_port,
+                              time: value.time,
+                            },
+                          }}
+                        >
+                          <Button colorScheme="blue" size="lg" w="100%">
+                            Create Booking
+                          </Button>
+                        </Link>
                       </td>
                     </tr>
                   );
