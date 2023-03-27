@@ -199,7 +199,9 @@ def create_booking(
 
         # create user record
         try:
-            models.User.create_row(db,user_id=user_id, name=name, email=email,phone=phone)
+            models.User.create_row(
+                db, user_id=user_id, name=name, email=email, phone=phone
+            )
             print(
                 {"user_id": user_id, "name I got": name, "email": email, "phone": phone}
             )
@@ -214,7 +216,14 @@ def create_booking(
 
     # create booking record
     try:
-        models.Booking.create_booking(db=db, booking_id=booking_id, user_id=user_id, schedule_id=schedule_id, vehicle_id=vehicle_id, passengers=passengers)
+        models.Booking.create_booking(
+            db=db,
+            booking_id=booking_id,
+            user_id=user_id,
+            schedule_id=schedule_id,
+            vehicle_id=vehicle_id,
+            passengers=passengers,
+        )
         print(
             {
                 "booking_id": booking_id,
