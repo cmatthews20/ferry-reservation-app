@@ -96,6 +96,27 @@ class Schedule(BaseClass):
             .all()
         )
 
+    def get_row(db: Session, schedule_id: str):
+        return db.query(Schedule).filter(Schedule.schedule_id == schedule_id).all()
+
+    def update_passengers(db: Session, schedule_id: str, passengers: int):
+        try:
+            db.query(Schedule).filter_by(schedule_id=schedule_id).update(
+                {Schedule.seats_occupied: Schedule.seats_occupied + passengers}
+            )
+            db.commit()
+        except Exception as e:
+            raise e
+
+    def update_vehicles(db: Session, schedule_id: str):
+        try:
+            db.query(Schedule).filter_by(schedule_id=schedule_id).update(
+                {Schedule.vehicles_occupied: Schedule.vehicles_occupied + 1}
+            )
+            db.commit()
+        except Exception as e:
+            raise e
+
 
 class Port(BaseClass):
     __tablename__ = "ports"
@@ -235,13 +256,13 @@ class User(BaseClass):
     def is_code_unique(unique_code: str, db: Session) -> bool:
         user = db.query(User).filter_by(user_id=unique_code).first()
         return user is None
-    
+
     def is_email_unique(email: str, db: Session) -> bool:
         email = db.query(User).filter_by(email=email).first()
         return email is None
-    
+
     def get_user_by_email(email: str, db: Session):
-        email_row = db.query(User.user_id).filter_by(email=email).first()  
+        email_row = db.query(User.user_id).filter_by(email=email).first()
         if email_row is not None:
             return email_row.user_id
         else:

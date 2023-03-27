@@ -261,11 +261,17 @@ export default function TableDatePicker() {
                         <Link
                           href={{
                             pathname: "../BookingsForm/bookingsForm",
-                            query: { schedule_id: value.schedule_id },
+                            query: {
+                              schedule_id: value.schedule_id,
+                              ferry_name: value.ferry_name,
+                              depart_port: value.depart_port,
+                              arrive_port: value.arrive_port,
+                              time: value.time,
+                            },
                           }}
                         >
                           <Button colorScheme="blue" size="lg" w="100%">
-                            Book
+                            Create Booking
                           </Button>
                         </Link>
                       </td>
