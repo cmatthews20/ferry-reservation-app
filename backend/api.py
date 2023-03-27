@@ -202,9 +202,6 @@ def create_booking(
             models.User.create_row(
                 db, user_id=user_id, name=name, email=email, phone=phone
             )
-            print(
-                {"user_id": user_id, "name I got": name, "email": email, "phone": phone}
-            )
         except Exception as e:
             raise e
 
@@ -223,14 +220,6 @@ def create_booking(
             schedule_id=schedule_id,
             vehicle_id=vehicle_id,
             passengers=passengers,
-        )
-        print(
-            {
-                "booking_id": booking_id,
-                "schedule_id": schedule_id,
-                "vehicle_id": vehicle_id,
-                "passengers": passengers,
-            }
         )
     except Exception as e:
         raise e
