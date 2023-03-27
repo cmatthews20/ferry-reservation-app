@@ -71,6 +71,7 @@ class Schedule(BaseClass):
     ):
         return (
             db.query(
+                Schedule.schedule_id,
                 Ferry.ferry_name,
                 Schedule.time,
                 Ferry.passenger_capacity,
@@ -163,6 +164,30 @@ class Booking(BaseClass):
         db.refresh(new_booking)
         return new_booking
 
+    def is_code_unique(unique_code: str, db: Session) -> bool:
+        user = db.query(Booking).filter_by(booking_id=unique_code).first()
+        return user is None
+
+    def create_booking(
+        db: Session,
+        booking_id: str,
+        user_id: str,
+        schedule_id: str,
+        vehicle_id: str,
+        passengers: str,
+    ):
+        new_booking = Booking(
+            booking_id=booking_id,
+            user_id=user_id,
+            schedule_id=schedule_id,
+            vehicle_id=vehicle_id,
+            passengers=passengers,
+        )
+        db.add(new_booking)
+        db.commit()
+        db.refresh(new_booking)
+        return new_booking
+
     def delete_by_id(db: Session, booking_id: str):
         booking = db.query(Booking).filter(Booking.booking_id == booking_id).first()
         db.delete(booking)
@@ -204,3 +229,33 @@ class User(BaseClass):
 
     def get_table(db: Session, skip: int = 0, limit: int = 100):
         return db.query(User).offset(skip).limit(limit).all()
+
+    def is_code_unique(unique_code: str, db: Session) -> bool:
+        user = db.query(User).filter_by(user_id=unique_code).first()
+        return user is None
+    
+    def is_email_unique(email: str, db: Session) -> bool:
+        email = db.query(User).filter_by(email=email).first()
+        return email is None
+    
+    def get_user_by_email(email: str, db: Session):
+        email_row = db.query(User.user_id).filter_by(email=email).first()  
+        if email_row is not None:
+            return email_row.user_id
+        else:
+            return email_row
+
+    def create_row(db: Session, user_id, name, email, phone):
+        try:
+            new_user = User(
+                user_id=user_id,
+                name=name,
+                email=email,
+                phone=phone,
+            )
+            db.add(new_user)
+            db.commit()
+            db.refresh(new_user)
+            return new_user
+        except Exception as e:
+            raise e
