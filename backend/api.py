@@ -100,8 +100,7 @@ def get_port(
     return port
 
 
-# TODO: change this to /arrival_port/
-@app.get("/ports/{port_id}")
+@app.get("/arrival_ports/{port_id}")
 def read_port(
     port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 ):
@@ -219,6 +218,19 @@ def create_booking(
         )
     except Exception as e:
         raise e
+
+    try:
+        models.Schedule.update_passengers(
+            db=db, schedule_id=schedule_id, passengers=int(passengers)
+        )
+    except Exception as e:
+        raise e
+
+    if (vehicle_id == "Yes"):
+        try:
+            models.Schedule.update_vehicles(db=db, schedule_id=schedule_id)
+        except Exception as e:
+            raise e
 
     return {
         "user_id": user_id,

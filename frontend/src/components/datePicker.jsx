@@ -1,12 +1,11 @@
 //The date picker component fot the search bar
 
 import React, { useState, useEffect } from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addMonths } from "date-fns";
-
 import {
   Table,
   Thead,
@@ -17,7 +16,14 @@ import {
   SimpleGrid,
   GridItem,
 } from "@chakra-ui/react";
-import {Heading,} from "@chakra-ui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Heading,
+  Flex,
+} from "@chakra-ui/react";
 import {
   Button,
   VStack,
@@ -62,7 +68,6 @@ export default function TableDatePicker() {
         throw new Error(`Error! status: ${response.status}`);
       }
       const trips = await response.json();
-      console.log(trips);
       setTrips(trips);
     } catch (err) {
       console.log(err);
@@ -96,7 +101,7 @@ export default function TableDatePicker() {
   async function fetchArrivalPorts(selectedDeparturePort) {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/ports/${selectedDeparturePort}`,
+        `http://127.0.0.1:8000/arrival_ports/${selectedDeparturePort}`,
         {
           method: "GET",
           headers: {
@@ -176,7 +181,6 @@ export default function TableDatePicker() {
           </GridItem>
           <GridItem colSpan={1}>
             <DatePicker
-              showIcon
               placeholderText="Select Start Date"
               selected={startDate}
               startDate={startDate}
@@ -191,7 +195,6 @@ export default function TableDatePicker() {
           </GridItem>
           <GridItem colSpan={1}>
             <DatePicker
-              showIcon
               placeholderText="Select End Date"
               selected={endDate}
               endDate={endDate}
@@ -214,7 +217,7 @@ export default function TableDatePicker() {
                   Object.values(selectedArrivalPort)[0]
                 )
               }
-              colorScheme='blue' 
+              colorScheme="blue"
               w="100%"
             >
               Search!
@@ -237,7 +240,7 @@ export default function TableDatePicker() {
               <Thead>
                 <Tr>
                   <Th style={{ textAlign: "left" }}>Ferry Name</Th>
-                  <Th style={{ textAlign: "center" }}>time</Th>
+                  <Th style={{ textAlign: "center" }}>Time</Th>
                   <Th style={{ textAlign: "center" }}>Seats Left</Th>
                   <Th style={{ textAlign: "center" }}>Vehicle Spots Left</Th>
                 </Tr>
@@ -259,17 +262,27 @@ export default function TableDatePicker() {
                           hour12: true,
                         })}
                       </td>
-                      <td>{value.passenger_capacity}</td>
-                      <td>{value.vehicle_capacity}</td>
+                      <td>{value.passenger_capacity - value.seats_occupied}</td>
                       <td>
-                      <Link
-                      href={{
-                        pathname: '../BookingsForm/bookingsForm',
-                        query: {schedule_id: value.schedule_id}
-                      }}
-                      >
-                      <Button colorScheme='blue' size='lg' w="100%">Create Booking</Button>
-                      </Link>
+                        {value.vehicle_capacity - value.vehicles_occupied}
+                      </td>
+                      <td>
+                        <Link
+                          href={{
+                            pathname: "../BookingsForm/bookingsForm",
+                            query: {
+                              schedule_id: value.schedule_id,
+                              ferry_name: value.ferry_name,
+                              depart_port: value.depart_port,
+                              arrive_port: value.arrive_port,
+                              time: value.time,
+                            },
+                          }}
+                        >
+                          <Button colorScheme="blue" size="lg" w="100%">
+                            Create Booking
+                          </Button>
+                        </Link>
                       </td>
                     </tr>
                   );

@@ -12,6 +12,7 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react";
+
 import BookingsSearchBar from "./BookingsSearchBar";
 
 const API_HOST = "http://127.0.0.1:8000";
@@ -90,17 +91,17 @@ export default function BookingsTable() {
     <>
       <BookingsSearchBar handleSearch={handleSearch} />
       <TableContainer>
-        <Table variant="simple">
+        <Table variant="simple" style={{ textAlign: "center" }}>
           <Thead>
             <Tr>
-              <Th>booking_id</Th>
-              <Th>name</Th>
-              <Th>phone</Th>
+              <Th>Booking ID</Th>
+              <Th>Name</Th>
+              <Th>Phone</Th>
               <Th>Depart Port</Th>
               <Th>Arrive Port</Th>
               <Th>Date and Time</Th>
-              <Th>personal vehicle</Th>
-              <Th>additional passengers</Th>
+              <Th>Personal Vehicle</Th>
+              <Th>Additional Passengers</Th>
             </Tr>
           </Thead>
           <Tbody>

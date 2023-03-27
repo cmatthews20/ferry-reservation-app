@@ -1,7 +1,7 @@
 /*
 This page loads the Booking form component to fill up the information to reserve a seat.
 */
-import { Box, Center, Heading, VStack } from "@chakra-ui/react";
+import { Box, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
 import BookingForm from "../../components/BookingForm"
 import { DarkModeSwitch } from "../../components/DarkModeSwitch";
@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 
 export default function BookingsForm() {
   const router = useRouter();
-  const schedule_Id = router.query;
+  const schedule_data = router.query;
   return (
     <>
     <Navbar />
@@ -19,7 +19,7 @@ export default function BookingsForm() {
           <VStack>
             <Heading as='h2' size='2xl'>Booking Form</Heading>
                 <Box>
-                    <BookingForm />
+                    <BookingForm schedule_data={schedule_data} />
                 </Box>
           </VStack>
       </Box>

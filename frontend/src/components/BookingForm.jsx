@@ -14,58 +14,106 @@ import {
   SimpleGrid,
   GridItem,
   Checkbox,
-  Button
-} from '@chakra-ui/react'
-import { PhoneIcon, EmailIcon, AddIcon } from '@chakra-ui/icons'
-import React, { useState } from 'react'
+  Button,
+} from "@chakra-ui/react";
+import { PhoneIcon, EmailIcon, AddIcon } from "@chakra-ui/icons";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 
-function BookingForm () {
+const API_HOST = "http://127.0.0.1:8000";
+const CREATE_BOOKING_API_URL = `${API_HOST}/create_booking`;
+
+function BookingForm({ schedule_data }) {
   const [addFormData, setAddFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    passengers: '',
-    vehicle: ''
-  })
+    name: "",
+    phone: "",
+    email: "",
+    passengers: "",
+    vehicle: "",
+  });
 
-  const handleAddFormChange = event => {
-    const fieldName = event.target.getAttribute('name')
-    const fieldValue = event.target.value
+  const router = useRouter();
 
-    const newFormData = { ...addFormData }
-    newFormData[fieldName] = fieldValue
-
-    setAddFormData(newFormData)
+  async function createBooking(
+    name,
+    email,
+    phone,
+    schedule_id,
+    vehicle_id,
+    passengers
+  ) {
+    const url = `${CREATE_BOOKING_API_URL}?name=${name}&email=${email}&phone=${phone}&schedule_id=${schedule_id}&vehicle_id=${vehicle_id}&passengers=${passengers}`;
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
   }
 
-  const handleAddFormSubmit = event => {
+  const handleAddFormChange = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setAddFormData(newFormData);
+  };
+
+  const handleAddFormSubmit = async (event) => {
+    event.preventDefault();
     const newBooking = {
       name: addFormData.name,
       phone: addFormData.phone,
       email: addFormData.email,
       passengers: addFormData.passengers,
-      vehicle: addFormData.vehicle
+      vehicle: addFormData.vehicle,
+    };
+    console.log(newBooking);
+    try {
+      const data = await createBooking(
+        newBooking.name,
+        newBooking.email,
+        newBooking.phone,
+        schedule_data.schedule_id,
+        newBooking.vehicle,
+        newBooking.passengers
+      );
+      alert(`Booking created with ID: ${data.booking_id}`);
+      router.push("/../SearchPage/searchPage");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while creating the booking.");
     }
-
-    console.log(newBooking)
-  }
+  };
 
   return (
-    <VStack w='full' h='full' p={10} spacing={10} alignItems='flex-start'>
-      <VStack spacing={3} alignItems='flex-start'>
-        <Heading size='2xl'>Your details</Heading>
+    <VStack w="full" h="full" p={10} spacing={10} alignItems="flex-start">
+      <VStack spacing={3} alignItems="flex-start">
+        <Heading size="2xl">Your details</Heading>
         <Text>Please fill out your reservation details.</Text>
       </VStack>
-      <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
+      <SimpleGrid columns={2} columnGap={3} rowGap={7} w="full">
         <GridItem colSpan={2}>
-          <Heading size='s'>S1234 - Port Bell Island-Port Portugal Cove - Mon 5th May: 22:00</Heading>
+          <Heading size="s">
+            {schedule_data.schedule_id} - {schedule_data.ferry_name} -{" "}
+            {schedule_data.depart_port} to {schedule_data.arrive_port} -{" "}
+            {schedule_data.time}
+          </Heading>
         </GridItem>
         <GridItem colSpan={2}>
           <FormControl>
             <FormLabel>Full Name</FormLabel>
             <Input
-              name='name'
-              placeholder='John Doe'
+              name="name"
+              placeholder="John Doe"
               onChange={handleAddFormChange}
             />
           </FormControl>
@@ -75,13 +123,13 @@ function BookingForm () {
             <FormLabel>Phone</FormLabel>
             <InputGroup>
               <InputLeftElement
-                pointerEvents='none'
-                children={<PhoneIcon color='gray.300' />}
+                pointerEvents="none"
+                children={<PhoneIcon color="gray.300" />}
               />
               <Input
-                name='phone'
-                type='tel'
-                placeholder='Phone number'
+                name="phone"
+                type="tel"
+                placeholder="Phone number"
                 onChange={handleAddFormChange}
               />
             </InputGroup>
@@ -92,13 +140,13 @@ function BookingForm () {
             <FormLabel>Email</FormLabel>
             <InputGroup>
               <InputLeftElement
-                pointerEvents='none'
-                children={<EmailIcon color='gray.300' />}
+                pointerEvents="none"
+                children={<EmailIcon color="gray.300" />}
               />
               <Input
-                name='email'
-                type='email'
-                placeholder='Email'
+                name="email"
+                type="email"
+                placeholder="Email"
                 onChange={handleAddFormChange}
               />
             </InputGroup>
@@ -109,13 +157,13 @@ function BookingForm () {
             <FormLabel>Additional Passengers</FormLabel>
             <InputGroup>
               <InputLeftElement
-                pointerEvents='none'
-                children={<AddIcon color='gray.300' />}
+                pointerEvents="none"
+                children={<AddIcon color="gray.300" />}
               />
               <Input
-                name='passengers'
-                type='number'
-                placeholder='0'
+                name="passengers"
+                type="number"
+                placeholder="0"
                 onChange={handleAddFormChange}
               />
             </InputGroup>
@@ -123,15 +171,15 @@ function BookingForm () {
         </GridItem>
         <GridItem colSpan={1}>
           <FormLabel>Vehicle</FormLabel>
-          <Checkbox name='vehicle' value='Yes' onChange={handleAddFormChange}>
+          <Checkbox name="vehicle" value="Yes" onChange={handleAddFormChange}>
             Personal Vehicle
           </Checkbox>
         </GridItem>
         <GridItem colSpan={2}>
           <Button
-            size='lg'
-            w='full'
-            type='submit'
+            size="lg"
+            w="full"
+            type="submit"
             onClick={handleAddFormSubmit}
           >
             Place Reservation
@@ -139,7 +187,7 @@ function BookingForm () {
         </GridItem>
       </SimpleGrid>
     </VStack>
-  )
+  );
 }
 
-export default BookingForm
+export default BookingForm;
