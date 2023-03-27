@@ -27,7 +27,7 @@ Project documentation and design processes can be found in the [docs](./docs/) f
 | [Middleware](docs/middleware.md) | CORSMiddleware was used to make cross-origin requests. |
 | [Backend](docs/backend.md) | Additional notes for backend setup and troubleshooting. |
 | [Vercel and Next.js](docs/vercel-nextjs.md) | Future deployment with Vercel and more Next.js info. |
-| [Ideas](docs/ideas.md) | List of unfiltered new feature ideas we could implement after the course is over. |
+| [Ideas and TODO](docs/ideas.md) | TODO list and unfiltered feature ideas we could implement after the course is over. |
 | [Reading List](docs/reading-list.md) | Useful links for future/past work |
 
 ## How to run
