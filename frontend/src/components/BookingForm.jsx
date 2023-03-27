@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { PhoneIcon, EmailIcon, AddIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 const API_HOST = "http://127.0.0.1:8000";
 const CREATE_BOOKING_API_URL = `${API_HOST}/create_booking`;
@@ -30,7 +31,9 @@ function BookingForm({ schedule_data }) {
     vehicle: "",
   });
 
-  function createBooking(
+  const router = useRouter();
+
+  async function createBooking(
     name,
     email,
     phone,
@@ -45,19 +48,12 @@ function BookingForm({ schedule_data }) {
         "Content-Type": "application/json",
       },
     };
-    fetch(url, options)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
   }
 
   const handleAddFormChange = (event) => {
@@ -70,7 +66,8 @@ function BookingForm({ schedule_data }) {
     setAddFormData(newFormData);
   };
 
-  const handleAddFormSubmit = (event) => {
+  const handleAddFormSubmit = async (event) => {
+    event.preventDefault();
     const newBooking = {
       name: addFormData.name,
       phone: addFormData.phone,
@@ -79,14 +76,21 @@ function BookingForm({ schedule_data }) {
       vehicle: addFormData.vehicle,
     };
     console.log(newBooking);
-    createBooking(
-      newBooking.name,
-      newBooking.email,
-      newBooking.phone,
-      schedule_data.schedule_id,
-      newBooking.vehicle,
-      newBooking.passengers
-    );
+    try {
+      const data = await createBooking(
+        newBooking.name,
+        newBooking.email,
+        newBooking.phone,
+        schedule_data.schedule_id,
+        newBooking.vehicle,
+        newBooking.passengers
+      );
+      alert(`Booking created with ID: ${data.booking_id}`);
+      router.push("/../SearchPage/searchPage");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while creating the booking.");
+    }
   };
 
   return (
