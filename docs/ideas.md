@@ -15,3 +15,5 @@ Do before final demo:
 - Navbar button highlighting to show what page the user is on
 
 - Make landing page title
+
+- Improve UI so use cases are more obvious (text/hints)

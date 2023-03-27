@@ -2,6 +2,7 @@
 This is the Navbar component that is displayed at the top of every page in the application so that it allows for easier navigation.
 It contains the links to direct users to the different pages.
 */
+
 import {
     Button,
     Grid,
@@ -31,9 +32,6 @@ function Navbar() {
           </Link>
           <Link href="../Bookings/bookings">
             <Button colorScheme="">Bookings</Button>
-          </Link>
-          <Link href="../BookingsForm/bookingsForm">
-            <Button colorScheme="">Booking Form</Button>
           </Link>
         </GridItem>
         <GridItem area="content">
