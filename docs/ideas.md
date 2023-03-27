@@ -7,3 +7,5 @@
 - User Sessions
 
 - Unit Tests
+
+- Time filters for crossings (will need to deal with timezones)

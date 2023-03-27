@@ -2,7 +2,7 @@
 
 Taking inspriation (and frustration) from the Government of NL's ferry services, our group has decided to create a ferry reservation web application. It allows users to view the ferry schedule much easier and enables the additional reservation functionality. The app allows users to search for their desired crossing, make a booking, as well as check the status of their booking. In the next iteration, the app will include email reservation confirmation, and cancelling bookings. 
 
-**FOR DEMO: SAMPLE DATA ONLY INCLUDES CROSSINGS ON MAY 1 2023, and MAY 6, 2023**
+**FOR DEMO: SAMPLE DATA ONLY INCLUDES CROSSINGS ON MAY 1 2023, and MAY 6, 2023, FROM BELL ISLAND TO PORTUGAL COVE**
 
 ## Docs
 
