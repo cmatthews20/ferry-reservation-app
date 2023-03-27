@@ -100,8 +100,7 @@ def get_port(
     return port
 
 
-# TODO: change this to /arrival_port/
-@app.get("/ports/{port_id}")
+@app.get("/arrival_ports/{port_id}")
 def read_port(
     port_id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 ):
