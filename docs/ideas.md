@@ -10,14 +10,12 @@ Unfiltered ideas for later:
 
 Do before final demo:
 
-- Improve error handling
+- Improve error handling and form validation
 
 - Navbar button highlighting to show what page the user is on
-
-- Make landing page title
 
 - Improve UI so use cases are more obvious (text/hints)
 
 - Give each page a header title for the browser tab
 
-- Dark mode visibility improvements
+- Bring back dark mode with visibility improvements

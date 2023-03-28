@@ -102,7 +102,7 @@ class Schedule(BaseClass):
     def update_passengers(db: Session, schedule_id: str, passengers: int):
         try:
             db.query(Schedule).filter_by(schedule_id=schedule_id).update(
-                {Schedule.seats_occupied: Schedule.seats_occupied + passengers}
+                {Schedule.seats_occupied: Schedule.seats_occupied + passengers + 1}
             )
             db.commit()
         except Exception as e:
