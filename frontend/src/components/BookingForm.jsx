@@ -100,6 +100,7 @@ function BookingForm ({ schedule_data }) {
         <Heading size='xl'>Your details</Heading>
         <Text>Please fill out your reservation details.</Text>
       </VStack>
+      <form onSubmit={handleAddFormSubmit}>
       <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
         <GridItem colSpan={2}>
           <Heading size='s'>
@@ -180,12 +181,12 @@ function BookingForm ({ schedule_data }) {
             size='lg'
             w='full'
             type='submit'
-            onClick={handleAddFormSubmit}
           >
             Place Reservation
           </Button>
         </GridItem>
       </SimpleGrid>
+      </form>
     </VStack>
   )
 }
