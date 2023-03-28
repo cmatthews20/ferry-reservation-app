@@ -80,7 +80,7 @@ class Schedule(BaseClass):
                 Crossing.arrive_port,
                 Port.port_name,
                 Schedule.seats_occupied,
-                Schedule.vehicles_occupied
+                Schedule.vehicles_occupied,
             )
             .join(Schedule, Schedule.ferry_id == Ferry.ferry_id)
             .join(Crossing, Schedule.crossing_id == Crossing.crossing_id)

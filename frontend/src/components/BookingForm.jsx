@@ -101,91 +101,87 @@ function BookingForm ({ schedule_data }) {
         <Text>Please fill out your reservation details.</Text>
       </VStack>
       <form onSubmit={handleAddFormSubmit}>
-      <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
-        <GridItem colSpan={2}>
-          <Heading size='s'>
-            {schedule_data.schedule_id} - {schedule_data.ferry_name} -{' '}
-            {schedule_data.depart_port} to {schedule_data.arrive_port} -{' '}
-            {schedule_data.time}
-          </Heading>
-        </GridItem>
-        <GridItem colSpan={2}>
-          <FormControl isRequired>
-            <FormLabel>Full Name</FormLabel>
-            <Input
-              name='name'
-              placeholder='John Doe'
-              onChange={handleAddFormChange}
-            />
-          </FormControl>
-        </GridItem>
-        <GridItem colSpan={2}>
-          <FormControl isRequired>
-            <FormLabel>Phone</FormLabel>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents='none'
-                children={<PhoneIcon color='gray.300' />}
-              />
+        <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
+          <GridItem colSpan={2}>
+            <Heading size='s'>
+              {schedule_data.schedule_id} - {schedule_data.ferry_name} -{' '}
+              {schedule_data.depart_port} to {schedule_data.arrive_port} -{' '}
+              {schedule_data.time}
+            </Heading>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <FormControl isRequired>
+              <FormLabel>Full Name</FormLabel>
               <Input
-                name='phone'
-                type='tel'
-                placeholder='Phone number'
+                name='name'
+                placeholder='John Doe'
                 onChange={handleAddFormChange}
               />
-            </InputGroup>
-          </FormControl>
-        </GridItem>
-        <GridItem colSpan={2}>
-          <FormControl isRequired>
-            <FormLabel>Email</FormLabel>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents='none'
-                children={<EmailIcon color='gray.300' />}
-              />
-              <Input
-                name='email'
-                type='email'
-                placeholder='Email'
-                onChange={handleAddFormChange}
-              />
-            </InputGroup>
-          </FormControl>
-        </GridItem>
-        <GridItem colSpan={1}>
-          <FormControl>
-            <FormLabel>Additional Passengers</FormLabel>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents='none'
-                children={<AddIcon color='gray.300' />}
-              />
-              <Input
-                name='additional_passengers'
-                type='number'
-                placeholder='0'
-                onChange={handleAddFormChange}
-              />
-            </InputGroup>
-          </FormControl>
-        </GridItem>
-        <GridItem colSpan={1}>
-          <FormLabel>Vehicle</FormLabel>
-          <Checkbox name='vehicle' value='Yes' onChange={handleAddFormChange}>
-            Personal Vehicle
-          </Checkbox>
-        </GridItem>
-        <GridItem colSpan={2}>
-          <Button
-            size='lg'
-            w='full'
-            type='submit'
-          >
-            Place Reservation
-          </Button>
-        </GridItem>
-      </SimpleGrid>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <FormControl isRequired>
+              <FormLabel>Phone</FormLabel>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents='none'
+                  children={<PhoneIcon color='gray.300' />}
+                />
+                <Input
+                  name='phone'
+                  type='tel'
+                  placeholder='Phone number'
+                  onChange={handleAddFormChange}
+                />
+              </InputGroup>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <FormControl isRequired>
+              <FormLabel>Email</FormLabel>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents='none'
+                  children={<EmailIcon color='gray.300' />}
+                />
+                <Input
+                  name='email'
+                  type='email'
+                  placeholder='Email'
+                  onChange={handleAddFormChange}
+                />
+              </InputGroup>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={1}>
+            <FormControl>
+              <FormLabel>Additional Passengers</FormLabel>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents='none'
+                  children={<AddIcon color='gray.300' />}
+                />
+                <Input
+                  name='additional_passengers'
+                  type='number'
+                  placeholder='0'
+                  onChange={handleAddFormChange}
+                />
+              </InputGroup>
+            </FormControl>
+          </GridItem>
+          <GridItem colSpan={1}>
+            <FormLabel>Vehicle</FormLabel>
+            <Checkbox name='vehicle' value='Yes' onChange={handleAddFormChange}>
+              Personal Vehicle
+            </Checkbox>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <Button size='lg' w='full' type='submit'>
+              Place Reservation
+            </Button>
+          </GridItem>
+        </SimpleGrid>
       </form>
     </VStack>
   )

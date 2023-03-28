@@ -113,12 +113,12 @@ def create_booking(
         unique_number = str(uuid.uuid4().int)[:4]
         booking_id = f"B{unique_number}"
 
-    if (vehicle_id==""):
-        vehicle_id="No"
-    
-    passengers=1
-    if not (additional_passengers=="" or additional_passengers=="0"):
-        passengers+=int(additional_passengers)
+    if vehicle_id == "":
+        vehicle_id = "No"
+
+    passengers = 1
+    if not (additional_passengers == "" or additional_passengers == "0"):
+        passengers += int(additional_passengers)
 
     try:
         models.Booking.create_booking(
@@ -139,7 +139,7 @@ def create_booking(
     except Exception as e:
         raise e
 
-    if (vehicle_id == "Yes"):
+    if vehicle_id == "Yes":
         try:
             models.Schedule.update_vehicles(db=db, schedule_id=schedule_id)
         except Exception as e:
