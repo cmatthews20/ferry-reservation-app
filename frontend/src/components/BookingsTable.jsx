@@ -41,6 +41,9 @@ export default function BookingsTable () {
         throw new Error(`Error! status: ${response.status}`)
       }
       const result = await response.json()
+      if (result.length == 0) {
+        alert(`Booking ID was not found. Please try valid Booking ID`)
+      }
       setBookingData(result)
       return result
     } catch (err) {
