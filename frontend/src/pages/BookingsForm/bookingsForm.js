@@ -5,7 +5,6 @@ This page loads the Booking form component to fill up the information to reserve
 import { Box, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
 import BookingForm from "../../components/BookingForm"
-import { DarkModeSwitch } from "../../components/DarkModeSwitch";
 import Navbar from '../../components/Navbar.jsx';
 import { useRouter } from 'next/router'
 import Head from "next/head";
@@ -20,7 +19,6 @@ export default function BookingsForm() {
     </Head>
     <Navbar />
       <Box h="100vh">
-        <DarkModeSwitch />
           <VStack>
             <Heading as='h2' size='2xl'>Booking Form</Heading>
                 <Box>
