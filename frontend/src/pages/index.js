@@ -9,10 +9,9 @@ function LandingPage() {
       backgroundSize="cover"
       backgroundPosition="center"
       height="100vh"
-      filter='grayscale(80%)'
     >
     </Box>
-    <Box textAlign={'center'} opacity="90%" >
+    <Box textAlign={'center'} opacity="80%" >
     <AbsoluteCenter>
       <VStack bgGradient='linear(to-r, #C4F1F9, #3182CE)' rounded='lg' spacing='5' p='3' borderWidth='3px' borderColor='grey'>
         <Text color='black' as='b' fontSize='5xl'>Ferry Reservation Service</Text>
