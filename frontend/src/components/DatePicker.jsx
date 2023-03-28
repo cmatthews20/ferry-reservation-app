@@ -15,11 +15,18 @@ import {
   TableContainer,
   SimpleGrid,
   GridItem,
-  Heading,
+} from "@chakra-ui/react";
+import {Heading,} from "@chakra-ui/react";
+import {
   Button,
   VStack,
   StackDivider,
 } from "@chakra-ui/react";
+
+const API_HOST = "http://127.0.0.1:8000";
+const SCHEDULE_API_URL = `${API_HOST}/schedules`;
+const PORTS_API_URL = `${API_HOST}/ports`;
+const ARRIVAL_PORTS_API_URL = `${API_HOST}/arrival_ports`;
 
 const TripsContext = React.createContext({
   trips: [],
@@ -47,7 +54,7 @@ export default function TableDatePicker() {
   ) {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/schedules/${startDate}/${endDate}/${departure_Port}/${arrive_Port}`,
+        `${SCHEDULE_API_URL}/${startDate}/${endDate}/${departure_Port}/${arrive_Port}`,
         {
           method: "GET",
           headers: {
@@ -67,7 +74,7 @@ export default function TableDatePicker() {
 
   async function fetchDeparturePorts() {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/ports`, {
+      const response = await fetch(`${PORTS_API_URL}`, {
         method: "GET",
         headers: {
           accept: "application/json",
@@ -92,7 +99,7 @@ export default function TableDatePicker() {
   async function fetchArrivalPorts(selectedDeparturePort) {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/arrival_ports/${selectedDeparturePort}`,
+        `${ARRIVAL_PORTS_API_URL}/${selectedDeparturePort}`,
         {
           method: "GET",
           headers: {
@@ -215,7 +222,7 @@ export default function TableDatePicker() {
             </Button>
           </GridItem>
         </SimpleGrid>
-        <Heading style={{ textAlign: "center" }}>Available Crossings</Heading>
+        <Heading padding='10px' style={{ textAlign: "center" }}>Available Crossings</Heading>
         <div
           style={{
             display: "flex",
@@ -271,7 +278,7 @@ export default function TableDatePicker() {
                           }}
                         >
                           <Button colorScheme="blue" size="lg" w="100%">
-                            Create Booking
+                            Book!
                           </Button>
                         </Link>
                       </td>

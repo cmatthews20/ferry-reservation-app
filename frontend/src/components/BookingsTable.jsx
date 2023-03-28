@@ -1,6 +1,7 @@
 /*
 This is the bookings table component that uses the Bookings Search Bar component to display searched bookings
 */
+
 import React, { useState } from "react";
 import {
   Table,
@@ -100,7 +101,7 @@ export default function BookingsTable() {
               <Th>Arrive Port</Th>
               <Th>Date and Time</Th>
               <Th>Personal Vehicle</Th>
-              <Th>Additional Passengers</Th>
+              <Th>Passengers</Th>
             </Tr>
           </Thead>
           <Tbody>

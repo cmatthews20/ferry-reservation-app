@@ -1,4 +1,4 @@
-//Creates the search page, components should include date picker, the output table and search bar
+//Creates the crossings page where users can search by date and ports
 
 import Head from "next/head";
 import Navbar from "../../components/Navbar.jsx";

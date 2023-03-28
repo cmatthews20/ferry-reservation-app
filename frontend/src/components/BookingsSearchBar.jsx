@@ -1,7 +1,8 @@
 /*
 This is the Bookings SearchBar used to collect the Booking ID from users to search the Bookings database and display the bookings in a table
 */
-import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+
+import { FormControl, FormLabel, FormErrorMessage, Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik';
 import { Search2Icon } from '@chakra-ui/icons'
 

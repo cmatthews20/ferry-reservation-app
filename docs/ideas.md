@@ -1,11 +1,21 @@
-# Ideas
+# Ideas and TODO
 
-//TODO: Finish instructions for running project and dependency installation
-
-//TODO: Update requirements.txt file for `pip install -r /path/to/requirements.txt`, and installation requirements
+Unfiltered ideas for later:
 
 - User Sessions
 
 - Unit Tests
 
 - Time filters for crossings (will need to deal with timezones)
+
+Do before final demo:
+
+- Improve error handling and form validation
+
+- Navbar button highlighting to show what page the user is on
+
+- Improve UI so use cases are more obvious (text/hints)
+
+- Give each page a header title for the browser tab
+
+- Bring back dark mode with visibility improvements

@@ -2,6 +2,7 @@
 This is the Navbar component that is displayed at the top of every page in the application so that it allows for easier navigation.
 It contains the links to direct users to the different pages.
 */
+
 import {
     Button,
     Grid,
@@ -15,6 +16,7 @@ function Navbar() {
         templateAreas={`"header""content"`}
         templateRows="4rem 1fr"
         templateColumns="1fr"
+        paddingBottom = '10px'
       >
         <GridItem
           display="flex"
@@ -22,18 +24,15 @@ function Navbar() {
           justifyContent="left"
           area="header"
           shadow="base"
-          bg="#D69E2E"
+          bgGradient='linear(to-l, #C4F1F9, #3182CE)'
           px={5}
           py={4}
         >
           <Link href="../SearchPage/searchPage">
-            <Button colorScheme="">Crossings</Button>
+            <Button size='lg' colorScheme="">Crossings</Button>
           </Link>
           <Link href="../Bookings/bookings">
-            <Button colorScheme="">Bookings</Button>
-          </Link>
-          <Link href="../BookingsForm/bookingsForm">
-            <Button colorScheme="">Booking Form</Button>
+            <Button size='lg' colorScheme="">Bookings</Button>
           </Link>
         </GridItem>
         <GridItem area="content">

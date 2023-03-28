@@ -1,6 +1,7 @@
 /*
 This is the booking form component that takes the user information to create a booking to the booking table and update user information in user table
 */
+
 import {
   FormControl,
   FormLabel,
@@ -162,7 +163,6 @@ function BookingForm({ schedule_data }) {
               <Input
                 name="passengers"
                 type="number"
-                placeholder="0"
                 onChange={handleAddFormChange}
               />
             </InputGroup>

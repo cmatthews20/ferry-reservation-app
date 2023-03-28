@@ -21,8 +21,6 @@ def create_connection(db_file):
         print(e)
         raise e
 
-    return conn
-
 
 def create_table(conn, create_table_sql):
     """
@@ -106,33 +104,16 @@ def db_setup():
                                     passengers text
                               )"""
 
-    # create a database connection
     conn = create_connection(db)
 
-    # create tables
     if conn is not None:
-        # create crossings table
         create_table(conn, create_crossings_sql)
-
-        # create schedule table
         create_table(conn, create_schedule_sql)
-
-        # create ferries table
         create_table(conn, create_ferries_sql)
-
-        # create port table
         create_table(conn, create_port_sql)
-
-        # create users table
         create_table(conn, create_users_sql)
-
-        # create entity table
         create_table(conn, create_entity_sql)
-
-        # create pricings table
         create_table(conn, create_pricings_sql)
-
-        # create bookings table
         create_table(conn, create_bookings_sql)
 
     else:
