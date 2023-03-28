@@ -15,7 +15,7 @@ Project documentation and design processes can be found in the [docs](./docs/) f
 | [Troubleshooting](docs/troubleshooting.md) | Common error codes upon app startup and some possible fixes. |
 | [Current Database](docs/database-tables.md) | The format of the desired/current database tables. |
 | [Use Cases](docs/use-cases.md) | Use cases from project proposal. Initial cases have been implemented successfully. |
-| [ORM](docs/orm.md) | What is an ORM? Why are we using an ORM? |
+| [ORM](docs/orm.md) | Why are we using an ORM? |
 | [Demo Screenshots](docs/demo.md) | Demo screenshots in case the app does not launch. |
 
 ### Docs for Devs
