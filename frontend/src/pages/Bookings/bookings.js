@@ -5,23 +5,23 @@ This page loads the Booking table component to display the booking searched by b
 import { Box, Heading, VStack } from "@chakra-ui/react";
 import React from "react";
 import BookingsTable from "@/components/BookingsTable.jsx";
-import Navbar from '../../components/Navbar.jsx';
+import Navbar from "../../components/Navbar.jsx";
 import Head from "next/head";
 
 export default function Bookings() {
   return (
     <>
-    <Head>
-      <title>Bookings</title>
-    </Head>
-    <Navbar />
+      <Head>
+        <title>Bookings</title>
+      </Head>
+      <Navbar />
       <Box>
-          <VStack>
-            <Heading>Bookings</Heading>
-                <Box>
-                    <BookingsTable/>
-                </Box>
-          </VStack>
+        <VStack>
+          <Heading>Bookings</Heading>
+          <Box>
+            <BookingsTable />
+          </Box>
+        </VStack>
       </Box>
     </>
   );

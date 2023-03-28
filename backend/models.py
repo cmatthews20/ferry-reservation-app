@@ -80,7 +80,7 @@ class Schedule(BaseClass):
                 Crossing.arrive_port,
                 Port.port_name,
                 Schedule.seats_occupied,
-                Schedule.vehicles_occupied
+                Schedule.vehicles_occupied,
             )
             .join(Schedule, Schedule.ferry_id == Ferry.ferry_id)
             .join(Crossing, Schedule.crossing_id == Crossing.crossing_id)
@@ -99,10 +99,10 @@ class Schedule(BaseClass):
     def get_row(db: Session, schedule_id: str):
         return db.query(Schedule).filter(Schedule.schedule_id == schedule_id).all()
 
-    def update_passengers(db: Session, schedule_id: str, passengers: int):
+    def update_passengers(db: Session, schedule_id: str, total_passengers: int):
         try:
             db.query(Schedule).filter_by(schedule_id=schedule_id).update(
-                {Schedule.seats_occupied: Schedule.seats_occupied + passengers + 1}
+                {Schedule.seats_occupied: Schedule.seats_occupied + total_passengers}
             )
             db.commit()
         except Exception as e:
