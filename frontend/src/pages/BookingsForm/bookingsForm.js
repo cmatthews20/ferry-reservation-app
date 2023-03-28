@@ -8,12 +8,16 @@ import BookingForm from "../../components/BookingForm"
 import { DarkModeSwitch } from "../../components/DarkModeSwitch";
 import Navbar from '../../components/Navbar.jsx';
 import { useRouter } from 'next/router'
+import Head from "next/head";
 
 export default function BookingsForm() {
   const router = useRouter();
   const schedule_data = router.query;
   return (
     <>
+    <Head>
+      <title>Booking Form</title>
+    </Head>
     <Navbar />
       <Box h="100vh">
         <DarkModeSwitch />

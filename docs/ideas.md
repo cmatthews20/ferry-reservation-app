@@ -17,3 +17,7 @@ Do before final demo:
 - Make landing page title
 
 - Improve UI so use cases are more obvious (text/hints)
+
+- Give each page a header title for the browser tab
+
+- Dark mode visibility improvements

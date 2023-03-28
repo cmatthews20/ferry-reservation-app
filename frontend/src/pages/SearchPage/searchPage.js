@@ -3,6 +3,7 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar.jsx";
 import TableDatePicker from "../../components/DatePicker.jsx";
+import { DarkModeSwitch } from "../../components/DarkModeSwitch";
 
 export default function searchPage() {
   return (
@@ -11,6 +12,7 @@ export default function searchPage() {
         <title>Crossings</title>
       </Head>
       <Navbar />
+      <DarkModeSwitch />
       <TableDatePicker />
     </>
   );

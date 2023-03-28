@@ -222,7 +222,7 @@ export default function TableDatePicker() {
             </Button>
           </GridItem>
         </SimpleGrid>
-        <Heading style={{ textAlign: "center" }}>Available Crossings</Heading>
+        <Heading padding='10px' style={{ textAlign: "center" }}>Available Crossings</Heading>
         <div
           style={{
             display: "flex",
@@ -278,7 +278,7 @@ export default function TableDatePicker() {
                           }}
                         >
                           <Button colorScheme="blue" size="lg" w="100%">
-                            Create Booking
+                            Book!
                           </Button>
                         </Link>
                       </td>
