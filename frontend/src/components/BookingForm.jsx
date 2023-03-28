@@ -163,6 +163,7 @@ function BookingForm({ schedule_data }) {
               <Input
                 name="passengers"
                 type="number"
+                placeholder="0"
                 onChange={handleAddFormChange}
               />
             </InputGroup>

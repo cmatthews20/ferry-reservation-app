@@ -88,7 +88,7 @@ def create_booking(
     email: str,
     phone: str,
     vehicle_id: str,
-    passengers: str = "0",
+    passengers: str,
     db: Session = Depends(get_db),
 ):
     user_id = models.User.get_user_by_email(email, db)
@@ -112,6 +112,11 @@ def create_booking(
     while not models.Booking.is_code_unique(booking_id, db):
         unique_number = str(uuid.uuid4().int)[:4]
         booking_id = f"B{unique_number}"
+
+    if (vehicle_id==""):
+        vehicle_id="No"
+    if (passengers=="" or passengers=="0"):
+        passengers="1"
 
     try:
         models.Booking.create_booking(

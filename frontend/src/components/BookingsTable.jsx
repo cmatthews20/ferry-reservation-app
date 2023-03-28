@@ -101,7 +101,7 @@ export default function BookingsTable() {
               <Th>Arrive Port</Th>
               <Th>Date and Time</Th>
               <Th>Personal Vehicle</Th>
-              <Th>Passengers</Th>
+              <Th>Total Passengers</Th>
             </Tr>
           </Thead>
           <Tbody>
