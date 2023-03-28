@@ -88,7 +88,7 @@ def create_booking(
     email: str,
     phone: str,
     vehicle_id: str,
-    passengers: str,
+    additional_passengers: str,
     db: Session = Depends(get_db),
 ):
     user_id = models.User.get_user_by_email(email, db)
@@ -115,8 +115,10 @@ def create_booking(
 
     if (vehicle_id==""):
         vehicle_id="No"
-    if (passengers=="" or passengers=="0"):
-        passengers="1"
+    
+    passengers=1
+    if not (additional_passengers=="" or additional_passengers=="0"):
+        passengers+=int(additional_passengers)
 
     try:
         models.Booking.create_booking(
@@ -125,14 +127,14 @@ def create_booking(
             user_id=user_id,
             schedule_id=schedule_id,
             vehicle_id=vehicle_id,
-            passengers=passengers,
+            passengers=str(passengers),
         )
     except Exception as e:
         raise e
 
     try:
         models.Schedule.update_passengers(
-            db=db, schedule_id=schedule_id, passengers=int(passengers)
+            db=db, schedule_id=schedule_id, total_passengers=passengers
         )
     except Exception as e:
         raise e

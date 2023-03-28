@@ -28,7 +28,7 @@ function BookingForm({ schedule_data }) {
     name: "",
     phone: "",
     email: "",
-    passengers: "",
+    additional_passengers: "",
     vehicle: "",
   });
 
@@ -40,9 +40,9 @@ function BookingForm({ schedule_data }) {
     phone,
     schedule_id,
     vehicle_id,
-    passengers
+    additional_passengers
   ) {
-    const url = `${CREATE_BOOKING_API_URL}?name=${name}&email=${email}&phone=${phone}&schedule_id=${schedule_id}&vehicle_id=${vehicle_id}&passengers=${passengers}`;
+    const url = `${CREATE_BOOKING_API_URL}?name=${name}&email=${email}&phone=${phone}&schedule_id=${schedule_id}&vehicle_id=${vehicle_id}&additional_passengers=${additional_passengers}`;
     const options = {
       method: "POST",
       headers: {
@@ -73,7 +73,7 @@ function BookingForm({ schedule_data }) {
       name: addFormData.name,
       phone: addFormData.phone,
       email: addFormData.email,
-      passengers: addFormData.passengers,
+      additional_passengers: addFormData.additional_passengers,
       vehicle: addFormData.vehicle,
     };
     console.log(newBooking);
@@ -84,7 +84,7 @@ function BookingForm({ schedule_data }) {
         newBooking.phone,
         schedule_data.schedule_id,
         newBooking.vehicle,
-        newBooking.passengers
+        newBooking.additional_passengers
       );
       alert(`Booking created with ID: ${data.booking_id}`);
       router.push("/../SearchPage/searchPage");
@@ -109,7 +109,7 @@ function BookingForm({ schedule_data }) {
           </Heading>
         </GridItem>
         <GridItem colSpan={2}>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel>Full Name</FormLabel>
             <Input
               name="name"
@@ -119,7 +119,7 @@ function BookingForm({ schedule_data }) {
           </FormControl>
         </GridItem>
         <GridItem colSpan={2}>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel>Phone</FormLabel>
             <InputGroup>
               <InputLeftElement
@@ -136,7 +136,7 @@ function BookingForm({ schedule_data }) {
           </FormControl>
         </GridItem>
         <GridItem colSpan={2}>
-          <FormControl>
+          <FormControl isRequired>
             <FormLabel>Email</FormLabel>
             <InputGroup>
               <InputLeftElement
@@ -161,7 +161,7 @@ function BookingForm({ schedule_data }) {
                 children={<AddIcon color="gray.300" />}
               />
               <Input
-                name="passengers"
+                name="additional_passengers"
                 type="number"
                 placeholder="0"
                 onChange={handleAddFormChange}
