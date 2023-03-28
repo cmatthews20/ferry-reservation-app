@@ -37,6 +37,8 @@ To run the application, two terminal instances will be needed; one for the backe
 
 ### Backend
 
+If pip is not installed on your machine, follow [this](https://pip.pypa.io/en/stable/installation/) tutorial to install it.
+
 1. Navigate to the `backend` folder: 
 
 ```bash
@@ -58,6 +60,8 @@ python -m uvicorn api:app --reload
 ```
 
 ### Frontend
+
+If npm is not installed on your machine, follow [this](https://phoenixnap.com/kb/install-node-js-npm-on-windows) tutorial to install it.
 
 1. Navigate to the `frontend` folder: 
 
