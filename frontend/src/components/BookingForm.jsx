@@ -38,16 +38,20 @@ function BookingForm ({ schedule_data }) {
   const router = useRouter()
 
   useEffect(() => {
-    async function getPortNames() {
+    async function getPortNames () {
       try {
-        const departPortResponse = await fetch(`${GET_PORT_NAME_URL}/${schedule_data.depart_port}`)
+        const departPortResponse = await fetch(
+          `${GET_PORT_NAME_URL}/${schedule_data.depart_port}`
+        )
         if (!departPortResponse.ok) {
           throw new Error(`Error! status: ${departPortResponse.status}`)
         }
         const departPortData = await departPortResponse.json()
         setDepartPortName(departPortData)
 
-        const arrivePortResponse = await fetch(`${GET_PORT_NAME_URL}/${schedule_data.arrive_port}`)
+        const arrivePortResponse = await fetch(
+          `${GET_PORT_NAME_URL}/${schedule_data.arrive_port}`
+        )
         if (!arrivePortResponse.ok) {
           throw new Error(`Error! status: ${arrivePortResponse.status}`)
         }
@@ -131,8 +135,7 @@ function BookingForm ({ schedule_data }) {
           <GridItem colSpan={2}>
             <Heading size='s'>
               {schedule_data.schedule_id} - {schedule_data.ferry_name} -{' '}
-              {departPortName} to {arrivePortName} -{' '}
-              {schedule_data.time}
+              {departPortName} to {arrivePortName} - {schedule_data.time}
             </Heading>
           </GridItem>
           <GridItem colSpan={2}>
