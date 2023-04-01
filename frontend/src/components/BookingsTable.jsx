@@ -24,14 +24,14 @@ export default function BookingsTable () {
   const [portsData, setPortsData] = useState([])
   var dataWithPorts = []
 
-  function handleSearch (booking_id) {
-    fetchBookingData(booking_id)
+  function handleSearch (booking_id, email) {
+    fetchBookingData(booking_id, email)
     fetchPortsData()
   }
 
-  async function fetchBookingData (BOOKING_ID) {
+  async function fetchBookingData (BOOKING_ID, EMAIL) {
     try {
-      const response = await fetch(`${BOOKING_API_URL}/${BOOKING_ID}`, {
+      const response = await fetch(`${BOOKING_API_URL}/${BOOKING_ID}/${EMAIL}`, {
         method: 'GET',
         headers: {
           accept: 'application/json'
@@ -42,7 +42,7 @@ export default function BookingsTable () {
       }
       const result = await response.json()
       if (result.length == 0) {
-        alert(`Booking ID was not found. Please try valid Booking ID`)
+        alert(`Booking ID and Email was not found. Please try valid Booking ID and Email`)
       }
       setBookingData(result)
       return result

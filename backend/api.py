@@ -71,12 +71,12 @@ def read_port(
     return port
 
 
-@app.get("/booking_data/{booking_Id}")
+@app.get("/booking_data/{booking_Id}/{email}")
 def get_booking_data(
-    booking_Id: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
+    booking_Id: str, email: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 ):
     booking_data = models.Booking.get_data(
-        db, booking_Id=booking_Id, skip=skip, limit=limit
+        db, booking_Id=booking_Id, email=email, skip=skip, limit=limit
     )
     return booking_data
 
