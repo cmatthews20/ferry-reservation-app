@@ -129,8 +129,11 @@ class Port(BaseClass):
         return db.query(Port).offset(skip).limit(limit).all()
 
     def get_row(db: Session, port_id: str):
-        return db.query(Port).filter(Port.port_id == port_id).all()
-
+        row = db.query(Port).filter(Port.port_id == port_id).first()
+        if row:
+            return row
+        else:
+            return None
 
 class Entity(BaseClass):
     __tablename__ = "entity"
