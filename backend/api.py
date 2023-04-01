@@ -155,3 +155,17 @@ def create_booking(
         "vehicle_id": vehicle_id,
         "passengers": passengers,
     }
+
+@app.delete("/cancel_booking/{booking_id}")
+def cancel_booking(booking_id: str, db: Session = Depends(get_db)):
+    row = models.Booking.get_row(db=db, booking_id=booking_id)
+    if row:
+        if (row.passengers != "0"):
+            print(f"DELETE {row.passengers} PASSENGERS")
+            models.Schedule.decrease_passengers(db, schedule_id=row.schedule_id, total_passengers=int(row.passengers))
+        if (row.vehicle_id == "Yes"):
+            print("DECREASE VEHICLE OCCUPIED BY 1")
+            models.Schedule.decrease_vehicles(db, schedule_id=row.schedule_id)
+        models.Booking.delete_by_id(db, booking_id=booking_id)
+
+    return row

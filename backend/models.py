@@ -117,6 +117,23 @@ class Schedule(BaseClass):
         except Exception as e:
             raise e
 
+    def decrease_passengers(db: Session, schedule_id: str, total_passengers: int):
+        try:
+            db.query(Schedule).filter_by(schedule_id=schedule_id).update(
+                {Schedule.seats_occupied: Schedule.seats_occupied - total_passengers}
+            )
+            db.commit()
+        except Exception as e:
+            raise e
+
+    def decrease_vehicles(db: Session, schedule_id: str):
+        try:
+            db.query(Schedule).filter_by(schedule_id=schedule_id).update(
+                {Schedule.vehicles_occupied: Schedule.vehicles_occupied - 1}
+            )
+            db.commit()
+        except Exception as e:
+            raise e
 
 class Port(BaseClass):
     __tablename__ = "ports"
@@ -172,7 +189,7 @@ class Booking(BaseClass):
         return db.query(Booking).offset(skip).limit(limit).all()
 
     def get_row(db: Session, booking_id: str):
-        return db.query(Booking).filter(Booking.booking_id == booking_id).all()
+        return db.query(Booking).filter(Booking.booking_id == booking_id).first()
 
     def create_row(db: Session, booking: schemas.BookingCreate):
         new_booking = Booking(
