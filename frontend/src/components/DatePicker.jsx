@@ -258,7 +258,7 @@ export default function TableDatePicker () {
                 <AlertTitle>Error!</AlertTitle>
                 {Object.entries(errorSearch).map(([key, value]) => (
                   <AlertDescription key={key}>
-                    {`${value} ,`}
+                    {`${value},\u00A0`} 
                   </AlertDescription>
                 ))}
               </Alert>
