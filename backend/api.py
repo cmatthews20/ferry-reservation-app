@@ -60,6 +60,12 @@ def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     ports_table = models.Port.get_table(db, skip=skip, limit=limit)
     return ports_table
 
+@app.get("/port_name/{port_id}")
+def get_port_name(port_id: str, db: Session = Depends(get_db)):
+    name = models.Port.get_row(db, port_id=port_id)
+    if name == []:
+        raise HTTPException(status_code=404, detail="Empty response")
+    return name.port_name
 
 @app.get("/arrival_ports/{port_id}")
 def read_port(
