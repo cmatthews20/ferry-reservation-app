@@ -134,7 +134,7 @@ function BookingForm ({ schedule_data }) {
         <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
           <GridItem colSpan={2}>
             <Heading size='s'>
-              {schedule_data.schedule_id} - {schedule_data.ferry_name} -{' '}
+              Ferry - {schedule_data.ferry_name} -{' '}
               {departPortName} to {arrivePortName} - {schedule_data.time}
             </Heading>
           </GridItem>
