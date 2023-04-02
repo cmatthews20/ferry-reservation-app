@@ -17,11 +17,12 @@ import {
   Button
 } from '@chakra-ui/react'
 import { PhoneIcon, EmailIcon, AddIcon } from '@chakra-ui/icons'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 const API_HOST = 'http://127.0.0.1:8000'
 const CREATE_BOOKING_API_URL = `${API_HOST}/create_booking`
+const GET_PORT_NAME_URL = `${API_HOST}/port_name`
 
 function BookingForm ({ schedule_data }) {
   const [addFormData, setAddFormData] = useState({
@@ -31,8 +32,37 @@ function BookingForm ({ schedule_data }) {
     additional_passengers: '',
     vehicle: ''
   })
+  const [departPortName, setDepartPortName] = useState('')
+  const [arrivePortName, setArrivePortName] = useState('')
 
   const router = useRouter()
+
+  useEffect(() => {
+    async function getPortNames () {
+      try {
+        const departPortResponse = await fetch(
+          `${GET_PORT_NAME_URL}/${schedule_data.depart_port}`
+        )
+        if (!departPortResponse.ok) {
+          throw new Error(`Error! status: ${departPortResponse.status}`)
+        }
+        const departPortData = await departPortResponse.json()
+        setDepartPortName(departPortData)
+
+        const arrivePortResponse = await fetch(
+          `${GET_PORT_NAME_URL}/${schedule_data.arrive_port}`
+        )
+        if (!arrivePortResponse.ok) {
+          throw new Error(`Error! status: ${arrivePortResponse.status}`)
+        }
+        const arrivePortData = await arrivePortResponse.json()
+        setArrivePortName(arrivePortData)
+      } catch (error) {
+        console.error('Error:', error)
+      }
+    }
+    getPortNames()
+  }, [schedule_data])
 
   async function createBooking (
     name,
@@ -104,9 +134,8 @@ function BookingForm ({ schedule_data }) {
         <SimpleGrid columns={2} columnGap={3} rowGap={7} w='full'>
           <GridItem colSpan={2}>
             <Heading size='s'>
-              {schedule_data.schedule_id} - {schedule_data.ferry_name} -{' '}
-              {schedule_data.depart_port} to {schedule_data.arrive_port} -{' '}
-              {schedule_data.time}
+              Ferry - {schedule_data.ferry_name} -{' '}
+              {departPortName} to {arrivePortName} - {schedule_data.time}
             </Heading>
           </GridItem>
           <GridItem colSpan={2}>
