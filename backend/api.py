@@ -60,12 +60,14 @@ def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     ports_table = models.Port.get_table(db, skip=skip, limit=limit)
     return ports_table
 
+
 @app.get("/port_name/{port_id}")
 def get_port_name(port_id: str, db: Session = Depends(get_db)):
     name = models.Port.get_row(db, port_id=port_id)
     if name == []:
         raise HTTPException(status_code=404, detail="Empty response")
     return name.port_name
+
 
 @app.get("/arrival_ports/{port_id}")
 def read_port(
@@ -79,7 +81,11 @@ def read_port(
 
 @app.get("/booking_data/{booking_Id}/{email}")
 def get_booking_data(
-    booking_Id: str, email: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
+    booking_Id: str,
+    email: str,
+    skip: int = 0,
+    limit: int = 100,
+    db: Session = Depends(get_db),
 ):
     booking_data = models.Booking.get_data(
         db, booking_Id=booking_Id, email=email, skip=skip, limit=limit
@@ -162,17 +168,19 @@ def create_booking(
         "passengers": passengers,
     }
 
+
 @app.delete("/cancel_booking/{booking_id}")
 def cancel_booking(booking_id: str, db: Session = Depends(get_db)):
     row = models.Booking.get_row(db=db, booking_id=booking_id)
     if row:
-        if (row.passengers != "0"):
+        if row.passengers != "0":
             print(f"DELETE {row.passengers} PASSENGERS")
-            models.Schedule.decrease_passengers(db, schedule_id=row.schedule_id, total_passengers=int(row.passengers))
-        if (row.vehicle_id == "Yes"):
+            models.Schedule.decrease_passengers(
+                db, schedule_id=row.schedule_id, total_passengers=int(row.passengers)
+            )
+        if row.vehicle_id == "Yes":
             print("DECREASE VEHICLE OCCUPIED BY 1")
             models.Schedule.decrease_vehicles(db, schedule_id=row.schedule_id)
         models.Booking.delete_by_id(db, booking_id=booking_id)
 
     return row
-    
