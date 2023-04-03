@@ -175,3 +175,4 @@ def cancel_booking(booking_id: str, db: Session = Depends(get_db)):
         models.Booking.delete_by_id(db, booking_id=booking_id)
 
     return row
+    
