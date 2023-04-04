@@ -34,9 +34,27 @@ def get_db():
         db.close()
 
 
-@app.get("/send_booking/{email_address}")
-def send_booking(email_address: str):
-    send_email(email_address=email_address)
+@app.get("/send_email")
+def send_booking(
+    email: str,
+    name: str,
+    booking_id: str,
+    arrive_port: str,
+    depart_port: str,
+    time: str,
+    passengers: str,
+    vehicle: str,
+):
+    send_email(
+        email,
+        name,
+        booking_id,
+        arrive_port,
+        depart_port,
+        time,
+        passengers,
+        vehicle,
+    )
     return {"message": "Email sent successfully"}
 
 
