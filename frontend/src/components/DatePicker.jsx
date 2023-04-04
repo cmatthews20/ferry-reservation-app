@@ -17,7 +17,7 @@ import {
   GridItem
 } from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
-import { Button, VStack, StackDivider } from '@chakra-ui/react'
+import { Button, VStack, StackDivider, Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react'
 
 const API_HOST = 'http://127.0.0.1:8000'
 const SCHEDULE_API_URL = `${API_HOST}/schedules`
@@ -41,6 +41,8 @@ export default function TableDatePicker () {
   const [selectedDeparturePort, setSelectedDeparturePort] = useState(null)
   const [arrivalPorts, setArrivalPortOptions] = useState([])
   const [selectedArrivalPort, setSelectedArrivalPort] = useState(null)
+  const [errorSearch, setErrorSearch] = useState({});
+  const [errorSearchResult, setErrorSearchResult] = useState({});
 
   async function fetchSchedule (
     startDate,
@@ -48,6 +50,7 @@ export default function TableDatePicker () {
     departure_Port,
     arrive_Port
   ) {
+    const errorsR = {};
     try {
       const response = await fetch(
         `${SCHEDULE_API_URL}/${startDate}/${endDate}/${departure_Port}/${arrive_Port}`,
@@ -63,8 +66,13 @@ export default function TableDatePicker () {
       }
       const trips = await response.json()
       setTrips(trips)
+      setErrorSearchResult(errorsR);
+      if (!trips.length) {
+        throw new Error('No trips found! Please try different dates.');
+      }
     } catch (err) {
-      console.log(err)
+      errorsR.Response = err.message;
+      setErrorSearchResult(errorsR);
     }
   }
 
@@ -119,7 +127,39 @@ export default function TableDatePicker () {
     }
   }
 
+  const handleSearchSubmit = () => {
+
+    event.preventDefault();
+
+    const errors = {};
+
+    if (startDate === null) {
+      errors.startDate = "Start Date is Required";
+    }
+    if (endDate === null) {
+      errors.endDate = "End Date is required";
+    }
+    if (selectedDeparturePort === null) {
+      errors.departurePort = "Departure Port is required";
+    }
+    if (selectedArrivalPort === null) {
+      errors.arrivalPort = "Arrival Port is required";
+    }
+
+    setErrorSearch(errors);
+
+    if (Object.keys(errors).length === 0) {
+      fetchSchedule(
+          startDate.toDateString(),
+          endDate.toDateString(),
+          Object.values(selectedDeparturePort)[0],
+          Object.values(selectedArrivalPort)[0]
+      )
+    }
+  }
+
   const handleChangeDeparturePorts = departurePorts => {
+    setSelectedArrivalPort(null);
     fetchArrivalPorts(Object.values(departurePorts)[0])
     setSelectedDeparturePort(departurePorts)
   }
@@ -152,6 +192,7 @@ export default function TableDatePicker () {
         <SimpleGrid
           columns={5}
           columnGap={3}
+          rowGap={2}
           w='full'
           justifyContent='space-between'
           alignContent='space-between'
@@ -203,19 +244,25 @@ export default function TableDatePicker () {
           </GridItem>
           <GridItem colSpan={1}>
             <Button
-              onClick={() =>
-                fetchSchedule(
-                  startDate.toDateString(),
-                  endDate.toDateString(),
-                  Object.values(selectedDeparturePort)[0],
-                  Object.values(selectedArrivalPort)[0]
-                )
-              }
+              onClick={handleSearchSubmit}
               colorScheme='blue'
               w='100%'
             >
               Search!
             </Button>
+          </GridItem>
+          <GridItem gridColumn="1 / -1">
+            {errorSearch && Object.keys(errorSearch).length > 0 &&(
+              <Alert status="error" w='100%'>
+                <AlertIcon />
+                <AlertTitle>Error!</AlertTitle>
+                {Object.entries(errorSearch).map(([key, value], index, arr) => (
+                  <AlertDescription key={key}>
+                    {`${value}${index === arr.length - 1 ? '.' : ',\u00A0'}`}
+                  </AlertDescription>
+                ))}
+              </Alert>
+            )}
           </GridItem>
         </SimpleGrid>
         <Heading padding='10px' style={{ textAlign: 'center' }}>
@@ -287,6 +334,17 @@ export default function TableDatePicker () {
             </Table>
           </TableContainer>
         </div>
+        {errorSearchResult && Object.keys(errorSearchResult).length > 0 &&(
+          <Alert status="error" w='99%'  mx="auto">
+            <AlertIcon />
+            <AlertTitle>Error!</AlertTitle>
+            {Object.entries(errorSearchResult).map(([key, value]) => (
+              <AlertDescription key={key}>
+                {`${value}`}
+              </AlertDescription>
+            ))}
+          </Alert>
+        )}
       </VStack>
     </TripsContext.Provider>
   )
