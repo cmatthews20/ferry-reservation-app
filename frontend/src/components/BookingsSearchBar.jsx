@@ -23,12 +23,22 @@ function BookingsSearchBar ({ handleSearch }) {
     return error
   }
 
+  function validateEmail (value) {
+    let error
+    if (!value) {
+      error = 'Email is required'
+    } else if (!/\S+@\S+\.\S+/.test(value)) {
+      error = 'Invalid email address'
+    }
+    return error
+  }
+
   return (
     <Formik
-      initialValues={{ booking_id: '' }}
+      initialValues={{ booking_id: '', email: '' }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          handleSearch(values['booking_id'])
+          handleSearch(values['booking_id'], values['email'])
           actions.setSubmitting(false)
         }, 1000)
       }}
@@ -40,7 +50,7 @@ function BookingsSearchBar ({ handleSearch }) {
               <FormControl
                 isInvalid={form.errors.booking_id && form.touched.booking_id}
               >
-                <FormLabel>Search Booking ID</FormLabel>
+                <FormLabel>Booking ID</FormLabel>
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents='none'
@@ -52,6 +62,26 @@ function BookingsSearchBar ({ handleSearch }) {
               </FormControl>
             )}
           </Field>
+
+          <Field name='email' validate={validateEmail}>
+            {({ field, form }) => (
+              <FormControl
+                mt={4}
+                isInvalid={form.errors.email && form.touched.email}
+              >
+                <FormLabel>Email</FormLabel>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents='none'
+                    children={<Search2Icon color='gray.300' />}
+                  />
+                  <Input {...field} placeholder='Email' />
+                </InputGroup>
+                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+
           <Button
             mt={4}
             colorScheme='teal'
@@ -66,4 +96,5 @@ function BookingsSearchBar ({ handleSearch }) {
     </Formik>
   )
 }
+
 export default BookingsSearchBar

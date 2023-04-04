@@ -12,12 +12,12 @@ export default function Bookings() {
   return (
     <>
       <Head>
-        <title>Bookings</title>
+        <title>Search Bookings</title>
       </Head>
       <Navbar />
       <Box>
         <VStack>
-          <Heading>Bookings</Heading>
+          <Heading>Search Bookings</Heading>
           <Box>
             <BookingsTable />
           </Box>
