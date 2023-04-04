@@ -10,6 +10,7 @@ import schemas, models
 from database import SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
+from email_server import send_email
 
 
 app = FastAPI()
@@ -31,6 +32,12 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+@app.get("/send_booking/{email_address}")
+def send_booking(email_address: str):
+    send_email(email_address=email_address)
+    return {"message": "Email sent successfully"}
 
 
 @app.get("/schedules/{start_time}/{end_time}/{departure_Port}/{arrival_Port}")
@@ -60,12 +67,14 @@ def get_ports(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     ports_table = models.Port.get_table(db, skip=skip, limit=limit)
     return ports_table
 
+
 @app.get("/port_name/{port_id}")
 def get_port_name(port_id: str, db: Session = Depends(get_db)):
     name = models.Port.get_row(db, port_id=port_id)
     if name == []:
         raise HTTPException(status_code=404, detail="Empty response")
     return name.port_name
+
 
 @app.get("/arrival_ports/{port_id}")
 def read_port(
