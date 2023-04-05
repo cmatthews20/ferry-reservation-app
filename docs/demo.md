@@ -29,7 +29,7 @@ See below the functionality for checking a booking, using the reservation number
 
 ### Cancel Booking
 
-See below the functionality for cancelling a booking on the check reservation page, users are notified of the cancel through an alert (Picture 1), and afterwards the booking no longer exists if searched for (Picture 2).
+See below the functionality for cancelling a booking on the check reservation page. Users are notified of the cancel through an alert (Picture 1), and afterwards the booking no longer exists if searched for (Picture 2).
 
 ![Cancel Booking](images/5_After pressing Cancel booking 1 Final Demo SS.jpg)
 ![Cancel Booking](images/6_After pressing Cancel booking 2 Final Demo SS.jpg)
