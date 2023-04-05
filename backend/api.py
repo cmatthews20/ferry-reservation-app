@@ -184,7 +184,7 @@ def create_booking(
 
     return {
         "user_id": user_id,
-        "name I got": name,
+        "name": name,
         "email": email,
         "phone": phone,
         "booking_id": booking_id,

@@ -26,7 +26,7 @@ def send_email(
         message["To"] = email_address
         message["Subject"] = "Your Booking Info"
 
-        body = f"Hello, {name}! \n\nSee below your booking info for your trip from {depart_port} to {arrive_port}: \n\nBooking ID (use this ID on the website to see update about your booking, or to cancel/edit your booking): {booking_id} \n\nDeparture Date/Time: {time} \n\nTotal passengers: {passengers} \n\nVehicle?: {vehicle} \n\nThank you and Bon Voyage!"
+        body = f"Hello, {name}! \n\nSee below your booking info for your trip from {depart_port} to {arrive_port}: \n\nBooking ID (use this ID on the website to see updates about your booking, or to cancel/edit your booking): {booking_id} \n\nDeparture Date/Time: {time} \n\nTotal passengers: {passengers} \n\nVehicle?: {vehicle} \n\nThank you and Bon Voyage!"
         message.attach(MIMEText(body, "plain"))
 
         session = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
