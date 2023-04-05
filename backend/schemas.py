@@ -1,5 +1,7 @@
 """
-Pydantic models (schemas). These classes define the schemas for the API.
+Pydantic models (schemas). These classes define the schemas for FastAPI.
+This allows for well defined data movments and easy data verification for 
+single table interactions with the frontend.
 """
 
 from pydantic import BaseModel

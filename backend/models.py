@@ -1,5 +1,6 @@
 """
-Database models/classes (ORM Models) used by SQLAlchemy and CRUD methods.
+Database models/classes (ORM Models) used by SQLAlchemy.
+These are required to make database queries work with our current design.
 """
 
 from sqlalchemy import Column, String, Integer, Float, ForeignKey

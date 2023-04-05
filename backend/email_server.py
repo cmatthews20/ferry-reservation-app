@@ -1,4 +1,6 @@
-# Email server setup + send functionality
+"""
+Email server setup and send_email function.
+"""
 
 import smtplib
 from email.mime.text import MIMEText

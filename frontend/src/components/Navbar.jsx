@@ -1,6 +1,5 @@
 /*
-This is the Navbar component that is displayed at the top of every page in the application so that it allows for easier navigation.
-It contains the links to direct users to the different pages.
+This is the Navbar component that is displayed at the top of every page for easy navigation to different pages.
 */
 
 import { Button, Grid, GridItem } from '@chakra-ui/react';
