@@ -64,10 +64,10 @@ uvicorn api:app --reload
 
 ```bash
 #For readable documentation
-/redoc
+http://127.0.0.1:8000/redoc
 
 #For testing
-/docs
+http://127.0.0.1:8000/docs
 ```
 
 ### Frontend
