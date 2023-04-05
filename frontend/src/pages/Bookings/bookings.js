@@ -1,5 +1,5 @@
 /*
-This page loads the Booking table component to display the booking searched by booking ID.
+This page loads the Booking table component to display the booking searched by booking ID and email.
 */
 
 import { Box, Heading, VStack } from '@chakra-ui/react';

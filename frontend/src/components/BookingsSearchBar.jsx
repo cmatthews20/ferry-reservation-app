@@ -1,5 +1,5 @@
 /*
-This is the Bookings SearchBar used to collect the Booking ID from users to search the Bookings database and display the bookings in a table
+This component collects the Booking ID and email from users.
 */
 
 import {

@@ -1,5 +1,5 @@
 /*
-This is the bookings table component that uses the Bookings Search Bar component to display searched bookings
+This component uses the Bookings Search Bar component to display booking info.
 */
 
 import React, { useState } from 'react';

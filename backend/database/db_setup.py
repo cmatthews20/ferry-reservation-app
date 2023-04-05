@@ -3,6 +3,7 @@ This script was used to set up the tables of the database
 It sets up the tables if not existing and then the data is populated by the user
 so that the data can be displayed and interacted with using components in the front end
 """
+
 import sqlite3
 from sqlite3 import Error
 

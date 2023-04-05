@@ -1,5 +1,5 @@
 /*
-This page loads the Booking form component to fill up the information to reserve a seat.
+This page loads the Booking form component to collect the information required to make a booking.
 */
 
 import { Box, Heading, VStack } from '@chakra-ui/react';

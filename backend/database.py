@@ -1,5 +1,5 @@
 """
-Initialize db location, engine, and base class.
+Initialize database location, engine, and sqlalchemy base class.
 """
 
 from sqlalchemy import create_engine

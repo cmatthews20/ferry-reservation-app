@@ -1,4 +1,6 @@
-//The date picker component fot the search bar
+/*
+This component takes user input and queries the database for available crossings.
+*/
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';

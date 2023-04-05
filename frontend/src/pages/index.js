@@ -1,3 +1,7 @@
+/*
+Landing page of the app.
+*/
+
 import Link from 'next/link';
 import { Button, AbsoluteCenter, Box, Text, VStack } from '@chakra-ui/react';
 
