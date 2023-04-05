@@ -10,6 +10,7 @@ import schemas, models
 from database import SessionLocal
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
+from email_server import send_email
 
 
 app = FastAPI()
@@ -31,6 +32,30 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+@app.get("/send_email")
+def send_booking(
+    email: str,
+    name: str,
+    booking_id: str,
+    arrive_port: str,
+    depart_port: str,
+    time: str,
+    passengers: str,
+    vehicle: str,
+):
+    send_email(
+        email,
+        name,
+        booking_id,
+        arrive_port,
+        depart_port,
+        time,
+        passengers,
+        vehicle,
+    )
+    return {"message": "Email sent successfully"}
 
 
 @app.get("/schedules/{start_time}/{end_time}/{departure_Port}/{arrival_Port}")
@@ -159,7 +184,7 @@ def create_booking(
 
     return {
         "user_id": user_id,
-        "name I got": name,
+        "name": name,
         "email": email,
         "phone": phone,
         "booking_id": booking_id,

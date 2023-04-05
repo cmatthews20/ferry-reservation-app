@@ -23,6 +23,7 @@ import { useRouter } from 'next/router'
 const API_HOST = 'http://127.0.0.1:8000'
 const CREATE_BOOKING_API_URL = `${API_HOST}/create_booking`
 const GET_PORT_NAME_URL = `${API_HOST}/port_name`
+const SEND_EMAIL_URL = `${API_HOST}/send_email`;
 
 function BookingForm ({ schedule_data }) {
   const [addFormData, setAddFormData] = useState({
@@ -64,6 +65,32 @@ function BookingForm ({ schedule_data }) {
     getPortNames()
   }, [schedule_data])
 
+  async function sendBookingEmail(
+    name,
+    email,
+    booking_id,
+    arrive_port,
+    depart_port,
+    time,
+    passengers,
+    vehicle
+  ) {
+    const url = `${SEND_EMAIL_URL}?email=${email}&name=${name}&booking_id=${booking_id}&arrive_port=${arrive_port}&depart_port=${depart_port}&time=${time}&passengers=${passengers}&vehicle=${vehicle}`;
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const response = await fetch(url, options);
+    console.log(response)
+    if (!response.ok) {
+      throw new Error(`Error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  }
+
   async function createBooking (
     name,
     email,
@@ -84,6 +111,9 @@ function BookingForm ({ schedule_data }) {
       throw new Error(`Error! status: ${response.status}`)
     }
     const data = await response.json()
+
+    sendBookingEmail(name, email, data.booking_id, arrivePortName, departPortName, schedule_data.time, data.passengers, data.vehicle_id)
+    
     return data
   }
 

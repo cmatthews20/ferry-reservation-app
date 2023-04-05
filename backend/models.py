@@ -152,6 +152,7 @@ class Port(BaseClass):
         else:
             return None
 
+
 class Entity(BaseClass):
     __tablename__ = "entity"
 
