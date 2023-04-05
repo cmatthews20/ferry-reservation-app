@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Button, AbsoluteCenter, Box, Text, VStack } from "@chakra-ui/react";
+import Link from 'next/link';
+import { Button, AbsoluteCenter, Box, Text, VStack } from '@chakra-ui/react';
 
 function LandingPage() {
   return (
@@ -10,7 +10,7 @@ function LandingPage() {
         backgroundPosition="center"
         height="100vh"
       ></Box>
-      <Box textAlign={"center"} opacity="80%">
+      <Box textAlign={'center'} opacity="80%">
         <AbsoluteCenter>
           <VStack
             bgGradient="linear(to-r, #C4F1F9, #3182CE)"
