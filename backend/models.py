@@ -135,6 +135,7 @@ class Schedule(BaseClass):
         except Exception as e:
             raise e
 
+
 class Port(BaseClass):
     __tablename__ = "ports"
 
@@ -238,7 +239,9 @@ class Booking(BaseClass):
         db.commit()
         return
 
-    def get_data(db: Session, booking_Id: str, email: str, skip: int = 0, limit: int = 100):
+    def get_data(
+        db: Session, booking_Id: str, email: str, skip: int = 0, limit: int = 100
+    ):
         return (
             db.query(User, Booking, Schedule, Crossing)
             .join(Booking, User.user_id == Booking.user_id)
