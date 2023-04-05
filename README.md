@@ -1,6 +1,6 @@
 # Ferry Reservation App
 
-Taking inspriation (and frustration) from the Government of NL's ferry services, our group has decided to create a ferry reservation web application. It allows users to view the ferry schedule much easier and enables the additional reservation functionality. The app allows users to search for their desired crossing, make a booking, as well as check the status of their booking. In the next iteration, the app will include email reservation confirmation, and cancelling bookings. 
+Taking inspriation (and frustration) from the Government of NL's ferry services, our group has decided to create a ferry reservation web application. It allows users to view the ferry schedule much easier and enables the additional reservation functionality. The app allows users to search for their desired crossing, make a booking, check the status of their booking, cancel their booking. The app will also send email confirmation when the user makes a booking. 
 
 **FOR DEMO: SAMPLE DATA ONLY INCLUDES CROSSINGS ON MAY 1 2023, and MAY 6, 2023, FROM BELL ISLAND TO PORTUGAL COVE**
 
@@ -13,6 +13,7 @@ Project documentation and design processes can be found in the [docs](./docs/) f
 | Link | Description |
 | --- | --- |
 | [Troubleshooting](docs/troubleshooting.md) | Common error codes upon app startup and some possible fixes. |
+| [Database Viewers](docs/database-viewers.md) | How to view the database if desired. |
 | [Current Database](docs/database-tables.md) | The format of the desired/current database tables. |
 | [Use Cases](docs/use-cases.md) | Use cases from project proposal. Final cases have been implemented successfully. |
 | [ORM](docs/orm.md) | Why are we using an ORM? |
@@ -54,9 +55,19 @@ pip install -r requirements.txt
 3. Run the API with Uvicorn:
 
 ```bash
-uvicorn api:app --reload
-#or
 python -m uvicorn api:app --reload
+#or
+uvicorn api:app --reload
+```
+
+4. (OPTIONAL) Go to the following endpoints to view the API documentation:
+
+```bash
+#For readable documentation
+/redoc
+
+#For testing
+/docs
 ```
 
 ### Frontend
