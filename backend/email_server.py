@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 SMTP_SERVER = "smtp.office365.com"
-SMTP_PORT = 4080
+SMTP_PORT = 587
 SMTP_USERNAME = "ferryreservationservice@outlook.com"
 SMTP_PASSWORD = "frs1shair2umama3cole!!"
 
