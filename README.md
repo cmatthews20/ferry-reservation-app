@@ -1,14 +1,14 @@
 # Ferry Reservation App
 
-Taking inspriation (and frustration) from the Government of NL's ferry services, our group has decided to create a ferry reservation web application. It allows users to view the ferry schedule much easier and enables the additional reservation functionality. The app allows users to search for their desired crossing, make a booking, check the status of their booking, cancel their booking. The app will also send email confirmation when the user makes a booking. 
+Taking inspiration (and frustration) from the Government of NL's ferry services, we (@cmatthews20, @Mepha89, @ShairYousuf) decided to create a ferry reservation and live alert web application. It allows users to view the ferry schedule much easier and enables additional reservation functionality. The app allows users to search for their desired crossing, make a booking, check the status of their booking, and cancel their booking. The app will also send an email confirmation when the user makes a booking. 
 
-**FOR DEMO: SAMPLE DATA ONLY INCLUDES CROSSINGS ON MAY 1 2023, and MAY 6, 2023, FROM BELL ISLAND TO PORTUGAL COVE**
+**FOR DEMO PURPOSES: SAMPLE DATA ONLY INCLUDES CROSSINGS ON MAY 1 2023, and MAY 6, 2023, FROM BELL ISLAND TO PORTUGAL COVE**
 
 ## Docs
 
-Project documentation and design processes can be found in the [docs](./docs/) folder (see Table of Contents below for details and links). We created this library to track design decisions/processes, justifications for certain design choices, and miscellaneous project documentation. We have broken the docs into two sections: Docs for Dr. Vardy, and Docs for the Devs. Docs for Dr. Vardy consists of docs that we felt were relevant to the course and would help contextualize our design decisions. It is certainly not required reading, but we thought it would be nice to have in case you are curious. Docs for Devs consists of useful links, troubleshooting help, and documentation from the planning phase. 
+Project documentation and design processes can be found in the [docs](./docs/) folder (see Table of Contents below for details and links). We created the docs to track design decisions/processes, justifications for certain design choices, and miscellaneous project documentation. We have broken the docs into two sections: Docs for Design, and Docs for Devs. Docs for Design consists of docs that we felt were technically relevant and would help contextualize our design decisions. Docs for Devs consists of useful links, troubleshooting help, and documentation from the planning phase. 
 
-### Docs for Dr. Vardy
+### Docs for Design
 
 | Link | Description |
 | --- | --- |
@@ -29,7 +29,7 @@ Project documentation and design processes can be found in the [docs](./docs/) f
 | [Middleware](docs/middleware.md) | CORSMiddleware was used to make cross-origin requests. |
 | [Backend](docs/backend.md) | Additional notes for backend setup and info. |
 | [Vercel and Next.js](docs/vercel-nextjs.md) | Future deployment with Vercel and more Next.js info. |
-| [Ideas and TODO](docs/ideas.md) | TODO list and unfiltered feature ideas we could implement after the course is over. |
+| [Ideas and TODO](docs/ideas.md) | TODO list and unfiltered feature ideas we could implement in the future. |
 | [Reading List](docs/reading-list.md) | Useful links for future/past work |
 
 ## How to run
